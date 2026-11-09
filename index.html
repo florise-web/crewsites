@@ -1,0 +1,872 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crew Sites | Websites for contractors</title>
+<meta name="description" content="Simple one-page websites for painting, remodeling and concrete crews, plus Google Maps setup. Get more calls from Google. Ready in 3–5 days.">
+
+<!-- ============================================================
+     НАСТРОЙКИ СТУДИИ. Название, номер WhatsApp и ссылки на примеры
+     меняются только здесь. Название подставится по всей странице.
+     (В <title> выше и в noscript можно поменять вручную, но JS и так
+     перепишет заголовок вкладки.)
+     ============================================================ -->
+<script>
+window.STUDIO = {
+  name: "Crew Sites",
+  whatsapp: "1XXXXXXXXXX",            // номер: 1 + 10 цифр без пробелов, например 17135550100
+  email: "",                           // если пусто, почта на сайте не показывается
+  prices: {                            // ЦЕНЫ: меняются только здесь, на странице подставятся сами
+    starter: "$497",
+    pro: "$997",
+    premium: "$1,497",
+    care: "$49",                       // Hosting & care, «от … в месяц»
+    agencies: "$2,000–5,000",          // якорь: сколько берут агентства
+    // ИИ-ассистент Sofia
+    maps: "$197",           mapsMonthly: "$49",       // Google Maps Boost: разово / ведение в месяц
+    aiSetup: "$297",        aiMonthly: "$149",        // AI Assistant
+    aiProSetup: "$497",     aiProMonthly: "$249",     // AI Assistant Pro
+    bundle: "$1,197",       bundleMonthly: "$149",    // Pro Website + AI Assistant
+    bundleSave: "$97",                                // экономия пакета (Pro $997 + AI $297 − $1,197)
+    receptionists: "$300–1,000"                       // якорь: живой ресепшионист в месяц
+  },
+  examples: {                          // после публикации заменить на адреса netlify.app
+    painting: "examples/painting/index.html",
+    remodeling: "examples/remodeling/index.html",
+    concrete: "examples/concrete/index.html"
+  }
+};
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper:#F2F3EF; --ink:#141C24; --blue:#2449D8; --marker:#FF5B2E; --rule:#D3D7D0; --steel:#5B6670; --white:#fff;
+    --wa:#1FA855;
+  }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:"Archivo", system-ui, sans-serif; font-size:17px; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  img { display:block; max-width:100%; }
+  a { color:inherit; }
+  .wrap { width:min(1140px, 100% - 32px); margin-inline:auto; }
+  h1,h2,h3 { margin:0; line-height:1; font-weight:800; font-stretch:115%; letter-spacing:-0.02em; }
+  h2 { font-size:clamp(32px, 6vw, 56px); margin-bottom:14px; }
+  .lead { color:var(--steel); font-size:19px; max-width:34em; margin:0 0 40px; }
+  section { padding:80px 0; }
+  :focus-visible { outline:3px solid var(--marker); outline-offset:3px; }
+
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:56px; padding:16px 26px; border-radius:999px; font:inherit; font-weight:700; font-size:18px; text-decoration:none; border:0; cursor:pointer; }
+  .btn svg { width:22px; height:22px; flex:none; }
+  .btn-wa { background:var(--wa); color:#fff; }
+  .btn-wa:hover { background:#18914A; }
+
+  /* header */
+  .top { position:sticky; top:0; z-index:20; background:rgba(242,243,239,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--rule); }
+  .top .wrap { height:64px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  .brand { display:flex; align-items:center; gap:10px; text-decoration:none; font-weight:800; font-size:20px; font-stretch:118%; letter-spacing:-0.01em; }
+  .brand-mark { width:28px; height:28px; flex:none; }
+  .top nav { display:flex; align-items:center; gap:18px; }
+  .navlink { display:none; text-decoration:none; color:var(--steel); font-size:15px; }
+  .navlink:hover { color:var(--ink); }
+  .lang { background:none; border:1.5px solid var(--ink); border-radius:999px; padding:7px 14px; font:inherit; font-size:14px; font-weight:600; color:var(--ink); cursor:pointer; }
+
+  /* hero */
+  .hero { padding:36px 0 72px; overflow:hidden; }
+  .hero .wrap { display:grid; gap:40px; }
+  .hero h1 { font-size:clamp(48px, 13vw, 104px); font-stretch:122%; letter-spacing:-0.035em; line-height:.92; }
+  .hero-sub { font-size:19px; color:var(--steel); max-width:30em; margin:22px 0 28px; }
+  .hero-meta { display:flex; flex-wrap:wrap; gap:10px 28px; margin:26px 0 0; padding:0; list-style:none; font-size:15px; color:var(--steel); }
+  .hero-meta b { color:var(--ink); font-weight:700; }
+
+  /* phone with blueprint dimension lines: the one loud element on the page */
+  .spec { position:relative; justify-self:center; padding:0 70px 58px 0; }
+  .phone { width:232px; border-radius:36px; padding:9px; background:var(--ink); box-shadow:0 30px 60px -28px rgba(20,28,36,.55); }
+  .phone img { border-radius:28px; width:100%; height:auto; aspect-ratio:375/812; object-fit:cover; object-position:top; }
+  .dim { position:absolute; color:var(--marker); font-weight:700; font-size:15px; white-space:nowrap; }
+  .dim > span { position:absolute; background:var(--paper); padding:2px 6px; }
+  .dim-v { top:0; bottom:58px; right:26px; width:2px; background:currentColor; }
+  .dim-v::before, .dim-v::after { content:""; position:absolute; left:-8px; width:18px; height:2px; background:currentColor; }
+  .dim-v::before { top:0; } .dim-v::after { bottom:0; }
+  .dim-v > span { top:50%; left:50%; transform:translate(-50%, -50%) rotate(90deg); }
+  .dim-h { left:0; right:70px; bottom:22px; height:2px; background:currentColor; }
+  .dim-h::before, .dim-h::after { content:""; position:absolute; top:-8px; width:2px; height:18px; background:currentColor; }
+  .dim-h::before { left:0; } .dim-h::after { right:0; }
+  .dim-h > span { left:50%; top:50%; transform:translate(-50%, -50%); padding:2px 10px; }
+
+  /* steps: a real sequence, so numbered */
+  .steps { background:var(--white); }
+  .step-list { list-style:none; margin:0; padding:0; display:grid; counter-reset:step; }
+  .step { position:relative; padding:0 0 34px 64px; counter-increment:step; }
+  .step::before { content:counter(step); position:absolute; left:0; top:-6px; width:44px; height:44px; border-radius:50%; display:grid; place-items:center; background:var(--ink); color:var(--paper); font-weight:800; font-size:19px; }
+  .step::after { content:""; position:absolute; left:21px; top:44px; bottom:0; width:2px; background:repeating-linear-gradient(var(--rule) 0 6px, transparent 6px 12px); }
+  .step:last-child { padding-bottom:0; }
+  .step:last-child::after { display:none; }
+  .step:last-child::before { background:var(--marker); }
+  .step h3 { font-size:25px; margin-bottom:8px; }
+  .step p { margin:0; color:var(--steel); max-width:28em; }
+
+  /* portfolio */
+  .work-list { display:grid; grid-auto-flow:column; grid-auto-columns:72%; gap:18px; overflow-x:auto; scroll-snap-type:x mandatory; scroll-padding-inline:16px; padding:4px 16px 18px; margin:0 -16px; }
+  .work-card { scroll-snap-align:start; display:flex; flex-direction:column; gap:14px; text-decoration:none; }
+  .work-card .phone { width:100%; }
+  .work-card h3 { font-size:22px; }
+  .work-card p { margin:4px 0 0; color:var(--steel); font-size:15px; }
+  .work-card .open { color:var(--blue); font-weight:700; font-size:15px; text-decoration:underline; text-underline-offset:3px; }
+  .work-card:hover .open { color:var(--ink); }
+  .work-note { color:var(--steel); font-size:15px; margin:18px 0 0; }
+
+  /* included */
+  .inc { background:var(--white); }
+  .inc-list { list-style:none; margin:0; padding:0; display:grid; border-top:1px solid var(--rule); }
+  .inc-list li { padding:18px 0 18px 40px; border-bottom:1px solid var(--rule); position:relative; }
+  .inc-list li::before { content:""; position:absolute; left:4px; top:23px; width:15px; height:8px; border-left:3px solid var(--blue); border-bottom:3px solid var(--blue); transform:rotate(-45deg); }
+  .inc-list b { display:block; font-weight:700; font-size:18px; }
+  .inc-list span { color:var(--steel); font-size:16px; }
+
+  /* price */
+  .price { background:var(--ink); color:var(--paper); }
+  .price .lead { color:#A9B2BC; }
+  .anchor { color:#C7CED6; }
+  .anchor span { color:var(--paper); font-weight:700; white-space:nowrap; }
+  .price-grid { display:grid; gap:18px; }
+  .plan { border:1.5px solid #34404C; border-radius:22px; padding:28px; display:flex; flex-direction:column; }
+  .plan-main { order:-1; background:var(--paper); color:var(--ink); border:3px solid var(--marker); position:relative; }
+  .badge { position:absolute; top:-15px; left:24px; margin:0; background:var(--marker); color:#fff; font-weight:700; font-size:14px; padding:5px 12px; border-radius:999px; }
+  .plan h3 { font-size:22px; font-stretch:110%; margin-bottom:12px; }
+  .amount { font-size:clamp(48px, 12vw, 60px); font-weight:900; font-stretch:122%; letter-spacing:-0.035em; line-height:.95; }
+  .plan-main .amount { font-size:clamp(64px, 17vw, 84px); }
+  .amount small { display:block; margin-top:8px; font-size:16px; font-weight:600; letter-spacing:0; font-stretch:100%; color:#A9B2BC; }
+  .plan-main .amount small { color:var(--steel); }
+  .plus { margin:20px 0 0; font-weight:700; font-size:15px; }
+  .plan ul { margin:12px 0 26px; padding:0 0 0 20px; }
+  .plan > .amount + ul { margin-top:20px; }
+  .plan li { margin:6px 0; }
+  .plan-side li, .plan-side .plus { color:#C7CED6; }
+  .plan .btn { margin-top:auto; width:100%; }
+  .btn-line { color:var(--paper); box-shadow:inset 0 0 0 2px #56626E; }
+  .btn-line:hover { box-shadow:inset 0 0 0 2px var(--paper); }
+  .care { margin-top:18px; border:1.5px dashed #46525E; border-radius:16px; padding:18px 22px; display:grid; gap:4px; }
+  .care p { margin:0; }
+  .care-title { font-size:18px; }
+  .care-title span { font-weight:700; }
+  .care-text { color:#A9B2BC; font-size:15px; }
+  .pay-note { margin:18px 0 0; color:#A9B2BC; font-size:15px; }
+
+  /* sofia: AI assistant */
+  .sofia { background:var(--white); }
+  .sofia-top { display:grid; gap:44px; }
+  .sofia-sub { font-size:clamp(22px, 4vw, 30px); font-weight:700; font-stretch:110%; margin:0 0 16px; color:var(--blue); }
+  .sofia .lead { margin-bottom:28px; }
+  .sofia-list { list-style:none; margin:0; padding:0; display:grid; gap:16px; }
+  .sofia-list li { position:relative; padding-left:34px; }
+  .sofia-list li::before { content:""; position:absolute; left:0; top:4px; width:20px; height:20px; border-radius:50%; background:var(--blue); box-shadow:inset 0 0 0 6px #DCE3FB; }
+  .sofia-list li.is-pro::before { background:var(--marker); box-shadow:inset 0 0 0 6px #FFE1D7; }
+  .sofia-list b { display:block; font-size:18px; }
+  .sofia-list span { color:var(--steel); font-size:16px; }
+  .sofia-list em { font-style:normal; font-size:12px; font-weight:700; color:#fff; background:var(--marker); padding:2px 8px; border-radius:999px; margin-left:6px; vertical-align:2px; }
+
+  .chat-demo { margin:0; justify-self:center; width:min(100%, 360px); }
+  .chat { border-radius:34px; padding:10px; background:var(--ink); box-shadow:0 34px 70px -30px rgba(20,28,36,.6); }
+  .chat-head { display:flex; align-items:center; gap:10px; padding:14px 14px 12px; background:#fff; border-radius:26px 26px 0 0; border-bottom:1px solid #E6E9EE; }
+  .chat-avatar { width:38px; height:38px; border-radius:50%; display:grid; place-items:center; flex:none; font-weight:800; color:#fff; background:linear-gradient(135deg, var(--blue), #6B86F0); }
+  .chat-who { display:grid; line-height:1.2; min-width:0; }
+  .chat-who b { font-size:16px; }
+  .chat-who small { color:var(--steel); font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .chat-status { margin-left:auto; font-size:12px; font-weight:600; color:#178A45; display:flex; align-items:center; gap:5px; white-space:nowrap; }
+  .chat-status::before { content:""; width:8px; height:8px; border-radius:50%; background:#22B35E; }
+  .chat-body { height:430px; overflow-y:auto; padding:16px 12px; display:flex; flex-direction:column; gap:8px; background:#EEF1F5; scroll-behavior:smooth; scrollbar-width:none; }
+  .chat-body::-webkit-scrollbar { display:none; }
+  .chat-input { background:#fff; border-radius:0 0 26px 26px; padding:12px 16px 14px; border-top:1px solid #E6E9EE; }
+  .chat-input span { display:block; padding:10px 14px; border-radius:999px; background:#EEF1F5; color:#98A1AB; font-size:14px; }
+  .msg { max-width:82%; padding:10px 13px; border-radius:18px; font-size:15px; line-height:1.4; animation:msg-in .32s ease-out both; }
+  .msg-them { align-self:flex-end; background:var(--blue); color:#fff; border-bottom-right-radius:6px; }
+  .msg-sofia { align-self:flex-start; background:#fff; color:var(--ink); border-bottom-left-radius:6px; box-shadow:0 1px 1px rgba(20,28,36,.06); }
+  .msg-photo { padding:6px; }
+  .msg-photo span { display:grid; place-items:center; width:150px; height:100px; border-radius:13px; background:linear-gradient(135deg, #C9D3F5, #8EA2EA); font-size:30px; }
+  .msg-booked { align-self:flex-start; background:#E3F6EA; color:#15592F; font-weight:700; border:1.5px solid #9ED9B3; }
+  .msg-note { align-self:center; max-width:92%; background:var(--ink); color:#E9ECEF; font-size:13px; border-radius:12px; text-align:left; }
+  .msg-note b { display:block; color:#FFB59C; font-size:12px; margin-bottom:2px; }
+  .typing { align-self:flex-start; background:#fff; border-radius:18px; border-bottom-left-radius:6px; padding:13px 14px; display:flex; gap:4px; animation:msg-in .2s ease-out both; }
+  .typing i { width:7px; height:7px; border-radius:50%; background:#A3ACB7; animation:dot 1s infinite ease-in-out; }
+  .typing i:nth-child(2) { animation-delay:.15s; } .typing i:nth-child(3) { animation-delay:.3s; }
+  @keyframes msg-in { from { opacity:0; transform:translateY(8px) scale(.98); } to { opacity:1; transform:none; } }
+  @keyframes dot { 0%, 60%, 100% { transform:translateY(0); opacity:.5; } 30% { transform:translateY(-4px); opacity:1; } }
+  .chat-demo figcaption { display:flex; justify-content:space-between; align-items:center; margin-top:12px; color:var(--steel); font-size:14px; padding:0 6px; }
+  .chat-replay { font:inherit; font-size:14px; font-weight:700; color:var(--blue); background:none; border:0; cursor:pointer; padding:6px 0; text-decoration:underline; text-underline-offset:3px; }
+
+  /* simple on purpose */
+  .simple { padding:56px 0; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); }
+  .simple-grid { display:grid; gap:28px; }
+  .simple h2 { font-size:clamp(30px, 5.5vw, 48px); }
+  .simple .lead { margin-bottom:0; }
+  .no-list { list-style:none; margin:0; padding:0; display:grid; gap:10px; }
+  .no-list li { position:relative; padding-left:34px; color:var(--steel); }
+  .no-list li::before, .no-list li::after { content:""; position:absolute; left:6px; top:12px; width:16px; height:2.5px; background:var(--marker); transform:rotate(45deg); }
+  .no-list li::after { transform:rotate(-45deg); }
+  .no-title { margin:0 0 14px; font-weight:800; font-size:20px; font-stretch:110%; }
+
+  /* google maps boost */
+  .maps { background:var(--white); }
+  .ba { display:grid; gap:22px; margin:0 0 56px; }
+  .ba-card { margin:0; border-radius:22px; padding:20px; background:var(--paper); border:1.5px solid var(--rule); }
+  .ba-after { border:3px solid var(--marker); background:#fff; }
+  .ba-tag { display:inline-block; margin-bottom:14px; font-weight:800; font-size:14px; letter-spacing:.04em; text-transform:uppercase; padding:4px 12px; border-radius:999px; background:var(--ink); color:var(--paper); }
+  .ba-after .ba-tag { background:var(--marker); color:#fff; }
+  .gmb { background:#fff; border:1px solid var(--rule); border-radius:16px; overflow:hidden; }
+  .ba-after .gmb { border-color:#E6E9EE; box-shadow:0 18px 40px -26px rgba(20,28,36,.5); }
+  .gmb-photos { display:grid; grid-template-columns:2fr 1fr 1fr; grid-template-rows:62px 62px; gap:3px; }
+  .gmb-photos span { display:grid; place-items:center; font-size:11px; font-weight:700; color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.35); }
+  .gmb-photos .p1 { grid-row:1 / 3; background:linear-gradient(135deg, #7C93E8, #2449D8); }
+  .gmb-photos .p2 { background:linear-gradient(135deg, #F7A27F, #FF5B2E); }
+  .gmb-photos .p3 { background:linear-gradient(135deg, #8FD0A8, #1FA855); }
+  .gmb-photos .p4 { background:linear-gradient(135deg, #B7BFC8, #5B6670); }
+  .gmb-photos .p5 { background:linear-gradient(135deg, #F3D27A, #D99A1E); }
+  .gmb-photos .p-empty { grid-column:1 / 4; grid-row:1 / 3; background:repeating-linear-gradient(45deg, #ECEEEA 0 10px, #E3E6E1 10px 20px); color:var(--steel); text-shadow:none; font-size:14px; }
+  .gmb-body { padding:14px 16px 16px; }
+  .gmb-name { display:block; font-size:21px; font-weight:800; line-height:1.15; }
+  .gmb-rate, .gmb-cat, .gmb-line { margin:4px 0 0; font-size:14px; color:var(--steel); }
+  .gmb-rate b { color:var(--ink); }
+  .stars { color:#E7A400; letter-spacing:1px; }
+  .stars-low { color:#C9A24A; }
+  .gmb-miss { color:#B3411F; font-weight:600; }
+  .gmb-ok { color:#15803D; font-weight:600; }
+  .gmb-actions { display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 4px; }
+  .chip { padding:7px 13px; border-radius:999px; font-size:13px; font-weight:700; border:1.5px solid var(--blue); color:var(--blue); }
+  .chip-off { border-color:var(--rule); color:#98A1AB; }
+  .gmb-svc { margin:12px 0 0; padding:12px 0 0; border-top:1px solid #E6E9EE; list-style:none; display:grid; gap:6px; font-size:14px; }
+  .gmb-svc li { display:flex; justify-content:space-between; gap:12px; }
+  .gmb-svc span { color:var(--steel); white-space:nowrap; }
+  .ba-cap { margin:14px 4px 0; color:var(--steel); font-size:15px; }
+  .ba-after .ba-cap { color:var(--ink); font-weight:600; }
+  .maps-do { display:grid; gap:36px; }
+  .maps-list { list-style:none; margin:0; padding:0; display:grid; border-top:1px solid var(--rule); }
+  .maps-list li { position:relative; padding:14px 0 14px 38px; border-bottom:1px solid var(--rule); font-size:16px; }
+  .maps-list li::before { content:""; position:absolute; left:4px; top:19px; width:15px; height:8px; border-left:3px solid var(--blue); border-bottom:3px solid var(--blue); transform:rotate(-45deg); }
+  .maps-list b { font-weight:700; }
+  .maps-list span { color:var(--steel); }
+  .maps-buy { border:3px solid var(--marker); border-radius:22px; padding:28px; background:var(--paper); align-self:start; }
+  .maps-buy h3 { font-size:24px; font-stretch:110%; margin-bottom:12px; }
+  .maps-buy .btn { width:100%; margin-top:20px; }
+  .maps-note { margin:14px 0 0; color:var(--steel); font-size:15px; }
+  .maps-sep { margin:14px 0 0; font-weight:700; font-size:15px; }
+
+  .ai-grid { display:grid; gap:18px; margin-top:64px; }
+  .ai-plan { border:1.5px solid var(--rule); border-radius:22px; padding:26px; display:flex; flex-direction:column; background:var(--paper); }
+  .ai-plan h3 { font-size:21px; font-stretch:108%; margin-bottom:12px; }
+  .ai-price { margin:0; font-size:52px; font-weight:900; font-stretch:122%; letter-spacing:-0.035em; line-height:1; }
+  .ai-price small { font-size:18px; font-weight:600; letter-spacing:0; font-stretch:100%; color:var(--steel); margin-left:4px; }
+  .ai-setup { margin:8px 0 0; color:var(--steel); font-weight:600; }
+  .ai-plan .plus { color:var(--ink); }
+  .ai-plan ul { margin:16px 0 0; padding:0 0 0 20px; }
+  .ai-plan li { margin:5px 0; }
+  .ai-bundle { order:-1; position:relative; background:var(--ink); color:var(--paper); border:3px solid var(--marker); }
+  .ai-bundle .ai-setup { color:#A9B2BC; }
+  .ai-bundle li { color:#C7CED6; }
+  .ai-bundle .btn { margin-top:24px; width:100%; }
+  .ai-free { margin:26px 0 0; font-weight:700; font-size:18px; }
+  .ai-anchor { margin:6px 0 0; color:var(--steel); }
+  .ai-anchor span { color:var(--ink); font-weight:700; white-space:nowrap; }
+
+  /* faq */
+  .faq-list { border-top:1px solid var(--rule); max-width:820px; }
+  .faq-list details { border-bottom:1px solid var(--rule); }
+  .faq-list summary { cursor:pointer; list-style:none; padding:22px 44px 22px 0; position:relative; font-weight:700; font-size:19px; }
+  .faq-list summary::-webkit-details-marker { display:none; }
+  .faq-list summary::after { content:""; position:absolute; right:8px; top:50%; width:11px; height:11px; margin-top:-9px; border-right:2.5px solid var(--ink); border-bottom:2.5px solid var(--ink); transform:rotate(45deg); transition:transform .2s; }
+  .faq-list details[open] summary::after { transform:rotate(225deg); margin-top:-3px; }
+  .faq-list details p { margin:-6px 0 22px; color:var(--steel); max-width:40em; }
+
+  /* contact */
+  .contact { padding-bottom:110px; }
+  .contact h2 { font-size:clamp(42px, 10vw, 84px); font-stretch:122%; letter-spacing:-0.035em; max-width:10em; line-height:.95; }
+  .contact .lead { margin-top:18px; }
+  .contact-row { display:flex; flex-wrap:wrap; gap:16px; align-items:center; }
+  .contact-mail { color:var(--steel); font-weight:600; }
+
+  footer { border-top:1px solid var(--rule); padding:28px 0 104px; color:var(--steel); font-size:14px; }
+  footer .wrap { display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; }
+
+  .float-wa { position:fixed; left:16px; right:16px; bottom:calc(14px + env(safe-area-inset-bottom)); z-index:30; box-shadow:0 12px 30px -10px rgba(20,28,36,.5); }
+
+  @media (min-width: 880px) {
+    section { padding:120px 0; }
+    .navlink { display:inline; }
+    .hero { padding:72px 0 120px; }
+    .hero .wrap { grid-template-columns:minmax(0, 1.3fr) minmax(0, .7fr); align-items:center; gap:40px; }
+    .hero .phone { width:270px; }
+    .step-list { grid-template-columns:repeat(3, 1fr); gap:36px; }
+    .step { padding:66px 0 0; }
+    .step::after { left:56px; right:-24px; top:16px; bottom:auto; width:auto; height:2px; background:repeating-linear-gradient(90deg, var(--rule) 0 6px, transparent 6px 12px); }
+    .work-list { grid-auto-flow:row; grid-template-columns:repeat(3, 1fr); overflow:visible; padding:0; margin:0; gap:40px; }
+    .inc-list { grid-template-columns:1fr 1fr; column-gap:48px; }
+    .simple-grid { grid-template-columns:1.1fr .9fr; gap:64px; align-items:center; }
+    .ba { grid-template-columns:1fr 1fr; gap:32px; }
+    .maps-do { grid-template-columns:1.25fr .75fr; gap:56px; }
+    .price-grid { grid-template-columns:1fr 1.15fr 1fr; align-items:stretch; gap:20px; }
+    .plan { padding:34px 30px; }
+    .plan-main { order:0; padding:44px 34px; margin:-16px 0; box-shadow:0 30px 60px -30px rgba(0,0,0,.6); }
+    .sofia-top { grid-template-columns:minmax(0, 1.1fr) minmax(0, .9fr); align-items:center; gap:64px; }
+    .chat-demo { justify-self:end; }
+    .chat-body { height:470px; }
+    .ai-grid { grid-template-columns:1fr 1fr 1.15fr; align-items:stretch; gap:20px; margin-top:88px; }
+    .ai-bundle { order:0; }
+    .care { grid-template-columns:auto 1fr; align-items:baseline; gap:24px; margin-top:34px; }
+    footer { padding-bottom:28px; }
+    .float-wa { display:none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html, .chat-body { scroll-behavior:auto; }
+    .faq-list summary::after { transition:none; }
+    .msg, .typing, .typing i { animation:none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <svg class="brand-mark" viewBox="0 0 28 28" aria-hidden="true"><rect width="28" height="28" rx="7" fill="#141C24"/><path d="M8 19.5V8.5M20 19.5V8.5" stroke="#FF5B2E" stroke-width="2.4"/><path d="M8 14h12" stroke="#F2F3EF" stroke-width="2.4"/></svg>
+      <span class="studio-name">Crew Sites</span>
+    </a>
+    <nav aria-label="Main">
+      <a class="navlink" href="#work" data-es="Trabajos">Work</a>
+      <a class="navlink" href="#price" data-es="Precios">Pricing</a>
+      <a class="navlink" href="#maps">Google Maps</a>
+      <a class="navlink" href="#sofia">Sofia AI</a>
+      <a class="navlink" href="#faq" data-es="Preguntas">FAQ</a>
+      <button class="lang" type="button" data-lang-toggle>Español</button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1 data-es="Más llamadas desde Google.">Get more calls from Google.</h1>
+        <p class="hero-sub" data-es="Hacemos sitios web simples y rápidos de una sola página para pintores, remodeladores y concreteros en Houston. En la primera pantalla: su teléfono a un toque, las zonas donde trabaja y sus reseñas de Google.">We build simple, fast one-page websites for painting, remodeling and concrete crews in Houston. On the first screen: your phone one tap away, the areas you serve and your Google reviews.</p>
+        <a class="btn btn-wa wa-link" href="https://wa.me/1XXXXXXXXXX" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>
+          <span data-es="Escríbanos por WhatsApp">Message us on WhatsApp</span>
+        </a>
+        <ul class="hero-meta">
+          <li data-es="Desde <b data-price=&quot;starter&quot;>$497</b>, pago único">From <b data-price="starter">$497</b>, one-time</li>
+          <li data-es="Listo en <b>3–5 días</b>">Ready in <b>3–5 days</b></li>
+          <li data-es="Vista previa <b>gratis</b> antes de pagar"><b>Free</b> preview before you pay</li>
+        </ul>
+      </div>
+      <div class="spec" aria-hidden="true">
+        <div class="phone"><img src="img/painting.jpg" alt="" width="375" height="812"></div>
+        <div class="dim dim-v"><span data-es="3–5 días">3–5 days</span></div>
+        <div class="dim dim-h"><span data-es="desde <span data-price=&quot;starter&quot;>$497</span>">from <span data-price="starter">$497</span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="simple" id="simple">
+    <div class="wrap simple-grid">
+      <div>
+        <h2 data-es="Simple a propósito.">Simple on purpose.</h2>
+        <p class="lead" data-es="Todo lo que necesita un contratista, en una sola página: sus servicios, sus fotos, sus reseñas y un botón para llamar. Rápida, clara y lista en días, no en meses.">Everything a contractor needs on one page: your services, your photos, your reviews and a button to call. Fast, clear and ready in days, not months.</p>
+      </div>
+      <div>
+        <p class="no-title" data-es="Lo que no hacemos">What we don't build</p>
+        <ul class="no-list">
+          <li data-es="Tiendas en línea">Online stores</li>
+          <li data-es="Cuentas de usuario y portales de clientes">Customer logins and portals</li>
+          <li data-es="Sitios grandes y complicados">Big, complicated websites</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="steps" id="how">
+    <div class="wrap">
+      <h2 data-es="Cómo funciona">How it works</h2>
+      <p class="lead" data-es="No necesita saber nada de computadoras. Todo se arregla por WhatsApp.">You don't need to know anything about computers. We handle it all over WhatsApp.</p>
+      <ol class="step-list">
+        <li class="step">
+          <h3 data-es="Hacemos una vista previa gratis">We build a free preview</h3>
+          <p data-es="Tomamos su perfil de Google Maps, sus reseñas y su ciudad, y le mandamos un sitio de muestra con su teléfono y sus zonas. Sin pagar nada.">We take your Google Maps listing, reviews and city, and send you a sample site with your phone and your service areas. You pay nothing for it.</p>
+        </li>
+        <li class="step">
+          <h3 data-es="Usted lo aprueba">You approve it</h3>
+          <p data-es="Nos dice qué cambiar: textos, fotos, servicios, colores. Ajustamos hasta que le guste.">Tell us what to change: text, photos, services, colors. We adjust until you like it.</p>
+        </li>
+        <li class="step">
+          <h3 data-es="Queda en línea">It's live</h3>
+          <p data-es="Lo publicamos con su dominio y lo conectamos a Google para que los clientes lo encuentren.">We publish it on your domain and connect it to Google so customers can find you.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="portfolio" id="work">
+    <div class="wrap">
+      <h2 data-es="Ejemplos">Recent sites</h2>
+      <p class="lead" data-es="Así se ven en el teléfono, donde los abren la mayoría de los clientes.">This is how they look on a phone, where most of your customers will open them.</p>
+      <div class="work-list">
+        <a class="work-card" data-example="painting" href="examples/painting/index.html" target="_blank" rel="noopener">
+          <div class="phone"><img src="img/painting.jpg" alt="Painting company website on a phone" width="375" height="812" loading="lazy"></div>
+          <div><h3>Brushline Painting</h3><p data-es="Pintura de casas">House painting</p></div>
+          <span class="open" data-es="Abrir el sitio">Open the site</span>
+        </a>
+        <a class="work-card" data-example="remodeling" href="examples/remodeling/index.html" target="_blank" rel="noopener">
+          <div class="phone"><img src="img/remodeling.jpg" alt="Remodeling company website on a phone" width="375" height="812" loading="lazy"></div>
+          <div><h3>Oakline Remodeling</h3><p data-es="Remodelación y handyman">Remodeling &amp; handyman</p></div>
+          <span class="open" data-es="Abrir el sitio">Open the site</span>
+        </a>
+        <a class="work-card" data-example="concrete" href="examples/concrete/index.html" target="_blank" rel="noopener">
+          <div class="phone"><img src="img/concrete.jpg" alt="Concrete company website on a phone" width="375" height="812" loading="lazy"></div>
+          <div><h3>Solid Ground Concrete</h3><p data-es="Concreto">Concrete</p></div>
+          <span class="open" data-es="Abrir el sitio">Open the site</span>
+        </a>
+      </div>
+      <p class="work-note" data-es="Cada sitio tiene versión en inglés y en español.">Every site comes in English and Spanish.</p>
+    </div>
+  </section>
+
+  <section class="inc" id="included">
+    <div class="wrap">
+      <h2 data-es="Qué incluye">What's included</h2>
+      <p class="lead" data-es="Todo lo que necesita un cliente para confiar en usted y llamar.">Everything a customer needs to trust you and call.</p>
+      <ul class="inc-list">
+        <li data-es="<b>Botones de llamar y WhatsApp</b><span>Siempre visibles en el teléfono, a un toque.</span>"><b>Call and WhatsApp buttons</b><span>Always on screen on a phone, one tap away.</span></li>
+        <li data-es="<b>Sus servicios y fotos de trabajos</b><span>Lo que hace, con fotos reales de sus proyectos.</span>"><b>Your services and job photos</b><span>What you do, with real photos of your projects.</span></li>
+        <li data-es="<b>Reseñas de Google</b><span>Sus mejores reseñas en la página principal.</span>"><b>Google reviews</b><span>Your best reviews on the main page.</span></li>
+        <li data-es="<b>Zonas donde trabaja</b><span>Los barrios de Houston que cubre, para salir en búsquedas locales.</span>"><b>Areas you serve</b><span>The Houston neighborhoods you cover, so you show up in local searches.</span></li>
+        <li data-es="<b>Formulario de presupuesto</b><span>Las solicitudes le llegan directo al teléfono o correo.</span>"><b>Free estimate form</b><span>Requests come straight to your phone or email.</span></li>
+        <li data-es="<b>Inglés y español</b><span>Un botón cambia el idioma de todo el sitio.</span>"><b>English and Spanish</b><span>One button switches the whole site.</span></li>
+        <li data-es="<b>Conexión con Google</b><span>Lo enlazamos con su perfil de Google Maps.</span>"><b>Connected to Google</b><span>We link it to your Google Maps profile.</span></li>
+        <li data-es="<b>Rápido en cualquier teléfono</b><span>Carga en segundos, aunque la señal sea mala.</span>"><b>Fast on any phone</b><span>Loads in seconds, even on a weak signal.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="price" id="price">
+    <div class="wrap">
+      <h2 data-es="Precios">Pricing</h2>
+      <p class="lead anchor" data-es="Las agencias cobran <span data-price=&quot;agencies&quot;>$2,000–5,000</span>. La misma calidad, a un precio pensado para contratistas.">Agencies charge <span data-price="agencies">$2,000–5,000</span>. Same quality, contractor-friendly price.</p>
+      <div class="price-grid">
+        <div class="plan plan-side">
+          <h3>Starter</h3>
+          <div class="amount"><span data-price="starter">$497</span><small data-es="pago único">one-time</small></div>
+          <ul>
+            <li data-es="Un sitio de una sola página">One simple one-page website</li>
+            <li data-es="Servicios, fotos y reseñas en la misma página">Services, photos and reviews on that page</li>
+            <li data-es="Hecho para el teléfono">Built for phones</li>
+            <li data-es="Botones de llamar y WhatsApp">Call and WhatsApp buttons</li>
+          </ul>
+          <a class="btn btn-line wa-link" href="https://wa.me/1XXXXXXXXXX" target="_blank" rel="noopener"><span data-es="Elegir Starter">Choose Starter</span></a>
+        </div>
+        <div class="plan plan-main">
+          <p class="badge" data-es="El más popular">Most popular</p>
+          <h3>Pro</h3>
+          <div class="amount"><span data-price="pro">$997</span><small data-es="pago único">one-time</small></div>
+          <p class="plus" data-es="El mismo sitio de una página, más:">The same one-page site, plus:</p>
+          <ul>
+            <li data-es="Versión en español">Spanish version</li>
+            <li data-es="Google Maps en la página y configuración básica de Google Business Profile">Google Maps on the page and basic Google Business Profile setup</li>
+            <li data-es="Formulario de solicitudes">Lead form</li>
+            <li data-es="Secciones extra en la misma página: servicios, galería y preguntas">Extra sections on the same page: services, gallery and FAQ</li>
+            <li data-es="SEO básico">Basic SEO</li>
+          </ul>
+          <a class="btn btn-wa wa-link" href="https://wa.me/1XXXXXXXXXX" target="_blank" rel="noopener"><span data-es="Elegir Pro">Choose Pro</span></a>
+        </div>
+        <div class="plan plan-side">
+          <h3>Premium</h3>
+          <div class="amount"><span data-price="premium">$1,497</span><small data-es="pago único">one-time</small></div>
+          <p class="plus" data-es="El mismo sitio de una página, con todo lo de Pro, más:">Still one page, with everything in Pro, plus:</p>
+          <ul>
+            <li data-es="Logotipo">Logo design</li>
+            <li data-es="Sistema para conseguir reseñas">Review collection system</li>
+            <li data-es="Sección con cada zona o ciudad donde trabaja">A section for each area or city you serve</li>
+            <li data-es="Más secciones: antes y después, precios «desde»">More sections: before/after work, “from” prices</li>
+            <li data-es="Primer mes de cambios gratis">First month of edits free</li>
+          </ul>
+          <a class="btn btn-line wa-link" href="https://wa.me/1XXXXXXXXXX" target="_blank" rel="noopener"><span data-es="Elegir Premium">Choose Premium</span></a>
+        </div>
+      </div>
+      <div class="care">
+        <p class="care-title" data-es="Hosting y mantenimiento: desde <span data-price=&quot;care&quot;>$49</span>/mes, opcional"><b>Hosting &amp; care</b>: from <span data-price="care">$49</span>/mo, optional</p>
+        <p class="care-text" data-es="Hosting, cambios en el sitio y actualización de reseñas. Cancele cuando quiera.">Hosting, site edits and review updates. Cancel anytime.</p>
+      </div>
+      <div class="care">
+        <p class="care-title" data-es="¿Solo quiere destacar en el mapa? <b>Google Maps Boost</b>: <span data-price=&quot;maps&quot;>$197</span>, pago único"><b>Just want to stand out on the map?</b> Google Maps Boost: <span data-price="maps">$197</span> one-time</p>
+        <p class="care-text"><a href="#maps" data-es="Ver qué incluye">See what's included</a></p>
+      </div>
+      <p class="pay-note" data-es="50% por adelantado, 50% después del lanzamiento. Tarjeta, Apple Pay, Google Pay: pago seguro.">50% upfront, 50% after launch. Card, Apple Pay, Google Pay: secure checkout.</p>
+    </div>
+  </section>
+
+  <section class="maps" id="maps">
+    <div class="wrap">
+      <h2 data-es="Destáquese en Google Maps.">Stand out on Google Maps.</h2>
+      <p class="lead" data-es="Casi todas las cuadrillas tienen un perfil a medias. Dejamos el suyo listo para que el cliente lo vea, lo elija y le llame, le escriba o agende directo desde el mapa.">Most crews have a half-empty listing. We set yours up so customers pick you, then call, message or book straight from the map.</p>
+
+      <div class="ba">
+        <figure class="ba-card ba-before">
+          <figcaption class="ba-tag" data-es="Antes">Before</figcaption>
+          <div class="gmb" aria-hidden="true">
+            <div class="gmb-photos"><span class="p-empty" data-es="Sin fotos">No photos</span></div>
+            <div class="gmb-body">
+              <b class="gmb-name">Garcia Painting</b>
+              <p class="gmb-rate"><span class="stars stars-low">★★★☆☆</span> <b>3.4</b> (9)</p>
+              <p class="gmb-cat" data-es="Pintor">Painter</p>
+              <p class="gmb-line gmb-miss" data-es="Sin horario, sin descripción, sin servicios">No hours, no description, no services</p>
+              <div class="gmb-actions"><span class="chip chip-off" data-es="Llamar">Call</span></div>
+              <p class="gmb-line gmb-miss" data-es="3 reseñas sin respuesta">3 reviews with no reply</p>
+            </div>
+          </div>
+          <p class="ba-cap" data-es="El cliente ve esto y sigue de largo.">The customer sees this and scrolls past.</p>
+        </figure>
+
+        <figure class="ba-card ba-after">
+          <figcaption class="ba-tag" data-es="Después">After</figcaption>
+          <div class="gmb" aria-hidden="true">
+            <div class="gmb-photos"><span class="p1" data-es="Cocina">Kitchen</span><span class="p2" data-es="Fachada">Exterior</span><span class="p3" data-es="Sala">Living room</span><span class="p4" data-es="Cuarto">Bedroom</span><span class="p5" data-es="Antes y después">Before/after</span></div>
+            <div class="gmb-body">
+              <b class="gmb-name">Garcia Painting</b>
+              <p class="gmb-rate"><span class="stars">★★★★★</span> <b>4.9</b> (86)</p>
+              <p class="gmb-cat" data-es="Pintor de casas · Houston y alrededores">House painter · Houston &amp; nearby</p>
+              <p class="gmb-line gmb-ok" data-es="Abierto · Cierra 6 PM · Hablamos español">Open · Closes 6 PM · Se habla español</p>
+              <div class="gmb-actions"><span class="chip" data-es="Llamar">Call</span><span class="chip" data-es="Mensaje">Message</span><span class="chip" data-es="Agendar">Book</span><span class="chip" data-es="Sitio web">Website</span></div>
+              <ul class="gmb-svc">
+                <li><b data-es="Pintura interior">Interior painting</b><span data-es="desde $350">from $350</span></li>
+                <li><b data-es="Pintura exterior">Exterior painting</b><span data-es="desde $900">from $900</span></li>
+                <li><b data-es="Gabinetes">Cabinets</b><span data-es="desde $600">from $600</span></li>
+              </ul>
+              <p class="gmb-line gmb-ok" data-es="El dueño respondió todas las reseñas">Owner replied to every review</p>
+            </div>
+          </div>
+          <p class="ba-cap" data-es="El cliente ve fotos, precios y botones, y llama.">The customer sees photos, prices and buttons, and calls.</p>
+        </figure>
+      </div>
+
+      <div class="maps-do">
+        <ul class="maps-list">
+          <li data-es="<b>Categorías y servicios con precios «desde»</b> <span>para que lo encuentren por lo que hace.</span>"><b>Categories and services with “from” prices</b> <span>so you show up for what you actually do.</span></li>
+          <li data-es="<b>Descripción con palabras clave</b> <span>en inglés y en español.</span>"><b>Description with the right keywords</b> <span>in English and Spanish.</span></li>
+          <li data-es="<b>10 a 20 fotos buenas con descripciones</b> <span>de sus trabajos reales.</span>"><b>10–20 good photos with captions</b> <span>of your real jobs.</span></li>
+          <li data-es="<b>Horario y zona de servicio</b> <span>completos y correctos.</span>"><b>Hours and service area</b> <span>complete and correct.</span></li>
+          <li data-es="<b>Botones de llamar, mensaje y cita</b> <span>y el enlace a su sitio web.</span>"><b>Call, message and booking buttons</b> <span>plus the link to your website.</span></li>
+          <li data-es="<b>Primeras publicaciones</b> <span>y respuesta a todas sus reseñas.</span>"><b>First posts</b> <span>and a reply to every review you have.</span></li>
+          <li data-es="<b>Código QR y mensajes listos</b> <span>para pedir reseñas nuevas y para responder las buenas y las malas.</span>"><b>QR code and ready-made messages</b> <span>to ask for new reviews and to reply to good and bad ones.</span></li>
+        </ul>
+
+        <div class="maps-buy">
+          <h3>Google Maps Boost</h3>
+          <div class="amount"><span data-price="maps">$197</span><small data-es="pago único">one-time</small></div>
+          <p class="maps-sep" data-es="Opcional: + <span data-price=&quot;mapsMonthly&quot;>$49</span>/mes y lo mantenemos al día (fotos, publicaciones, reseñas).">Optional: + <span data-price="mapsMonthly">$49</span>/mo and we keep it fresh (photos, posts, reviews).</p>
+          <a class="btn btn-wa wa-link" data-wa="maps" href="https://wa.me/1XXXXXXXXXX" target="_blank" rel="noopener"><span data-es="Quiero Google Maps Boost">I want Google Maps Boost</span></a>
+          <p class="maps-note" data-es="Se vende por separado. No necesita un sitio web con nosotros. El plan Pro incluye solo la configuración básica; Boost es el trabajo completo.">Sold on its own. You don't need a website from us. Pro includes only the basic setup; Boost is the full job.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sofia" id="sofia">
+    <div class="wrap">
+      <div class="sofia-top">
+        <div class="sofia-copy">
+          <h2 data-es="No vuelva a perder un cliente.">Never miss a lead again.</h2>
+          <p class="sofia-sub" data-es="Conozca a Sofia, su asistente con IA 24/7.">Meet Sofia, your 24/7 AI assistant.</p>
+          <p class="lead" data-es="Cada llamada que no contesta mientras está en el techo es un trabajo perdido. Casi siempre se queda con el trabajo quien responde primero. Sofia responde en segundos y agenda el presupuesto por usted.">Every call you miss on the roof is a job lost, and the crew that replies first usually gets it. Sofia answers in seconds and books the estimate for you.</p>
+          <ul class="sofia-list">
+            <li data-es="<b>Responde en 10 segundos</b><span>En el chat de su sitio y en cada solicitud del formulario, de día o de noche.</span>"><b>Answers in 10 seconds</b><span>On your website chat and every form request, day or night.</span></li>
+            <li data-es="<b>Habla inglés y español</b><span>Contesta en el idioma del cliente.</span>"><b>Speaks English and Spanish</b><span>Replies in your customer's language.</span></li>
+            <li data-es="<b>Hace las preguntas correctas</b><span>Qué trabajo, la dirección, cuándo, y pide fotos.</span>"><b>Asks the right questions</b><span>The job, the address, the timing, and asks for photos.</span></li>
+            <li data-es="<b>Agenda el presupuesto</b><span>Directo en su calendario.</span>"><b>Books the estimate</b><span>Straight into your calendar.</span></li>
+            <li data-es="<b>Le manda un resumen</b><span>Cada cliente nuevo por mensaje de texto o correo, listo para devolver la llamada.</span>"><b>Sends you a summary</b><span>Every new lead by text or email, ready for you to call back.</span></li>
+            <li class="is-pro" data-es="<b>Contesta llamadas perdidas <em>Pro</em></b><span>Si no puede contestar, Sofia le manda un SMS al cliente: «¡Perdón, no pudimos contestar! ¿En qué le ayudamos?»</span>"><b>Texts back missed calls <em>Pro</em></b><span>If you can't pick up, Sofia texts the customer: “Sorry we missed your call! What can we help with?”</span></li>
+          </ul>
+        </div>
+
+        <figure class="chat-demo">
+          <div class="chat" aria-label="Example chat with Sofia">
+            <div class="chat-head">
+              <span class="chat-avatar" aria-hidden="true">S</span>
+              <span class="chat-who"><b>Sofia</b><small data-es="Asistente de Brushline Painting">Brushline Painting assistant</small></span>
+              <span class="chat-status" data-es="En línea 24/7">Online 24/7</span>
+            </div>
+            <div class="chat-body" data-chat-body aria-live="off"></div>
+            <div class="chat-input" aria-hidden="true"><span data-es="Escriba un mensaje…">Type a message…</span></div>
+          </div>
+          <figcaption>
+            <span data-es="Ejemplo de conversación">Example conversation</span>
+            <button class="chat-replay" type="button" data-chat-replay data-es="Ver otra vez">Play again</button>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="ai-grid">
+        <div class="ai-plan">
+          <h3>AI Assistant</h3>
+          <p class="ai-price"><span data-price="aiMonthly">$149</span><small data-es="/mes">/mo</small></p>
+          <p class="ai-setup" data-es="+ <span data-price=&quot;aiSetup&quot;>$297</span> de instalación">+ <span data-price="aiSetup">$297</span> setup</p>
+          <ul>
+            <li data-es="Chat en su sitio y respuestas al formulario">Website chat and form replies</li>
+            <li data-es="Inglés y español">English and Spanish</li>
+            <li data-es="Agenda en su calendario">Calendar booking</li>
+            <li data-es="Resumen de cada cliente">Lead summary to you</li>
+          </ul>
+        </div>
+        <div class="ai-plan">
+          <h3>AI Assistant Pro</h3>
+          <p class="ai-price"><span data-price="aiProMonthly">$249</span><small data-es="/mes">/mo</small></p>
+          <p class="ai-setup" data-es="+ <span data-price=&quot;aiProSetup&quot;>$497</span> de instalación">+ <span data-price="aiProSetup">$497</span> setup</p>
+          <p class="plus" data-es="Todo lo anterior, más:">Everything above, plus:</p>
+          <ul>
+            <li data-es="SMS a llamadas perdidas">Missed-call text-back</li>
+            <li data-es="Recordatorio al cliente antes del presupuesto">Estimate reminders for customers</li>
+            <li data-es="Pide reseñas al terminar el trabajo">Review requests after the job</li>
+          </ul>
+        </div>
+        <div class="ai-plan ai-bundle">
+          <p class="badge" data-es="Ahorra <span data-price=&quot;bundleSave&quot;>$97</span>">Save <span data-price="bundleSave">$97</span></p>
+          <h3 data-es="Sitio Pro + Asistente IA">Pro Website + AI Assistant</h3>
+          <p class="ai-price"><span data-price="bundle">$1,197</span></p>
+          <p class="ai-setup" data-es="+ <span data-price=&quot;bundleMonthly&quot;>$149</span>/mes por Sofia">+ <span data-price="bundleMonthly">$149</span>/mo for Sofia</p>
+          <ul>
+            <li data-es="Todo el paquete Pro">The full Pro website</li>
+            <li data-es="Sofia instalada y lista desde el primer día">Sofia set up and live from day one</li>
+          </ul>
+          <a class="btn btn-wa wa-link" href="https://wa.me/1XXXXXXXXXX" target="_blank" rel="noopener"><span data-es="Quiero sitio + Sofia">Get site + Sofia</span></a>
+        </div>
+      </div>
+      <p class="ai-free" data-es="🎁 Primeros 3 clientes: el primer mes de Sofia gratis.">🎁 First 3 clients: first month of Sofia free.</p>
+      <p class="ai-anchor" data-es="Una recepcionista cuesta <span data-price=&quot;receptionists&quot;>$300–1,000</span>/mes. Sofia trabaja 24/7 por menos.">Human receptionists cost <span data-price="receptionists">$300–1,000</span>/mo. Sofia works 24/7 for less.</p>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <div class="wrap">
+      <h2 data-es="Preguntas frecuentes">Questions</h2>
+      <p class="lead" data-es="Si no ve su pregunta, escríbanos.">Don't see yours? Just message us.</p>
+      <div class="faq-list">
+        <details>
+          <summary data-es="¿Necesito un dominio?">Do I need a domain?</summary>
+          <p data-es="Si ya tiene uno, lo usamos. Si no, le ayudamos a registrar uno como sunombrepainting.com. Cuesta unos $15 al año y queda a su nombre.">If you have one, we use it. If not, we help you register one like yournamepainting.com. It's about $15 a year and it's in your name.</p>
+        </details>
+        <details>
+          <summary data-es="¿Y el hosting?">What about hosting?</summary>
+          <p data-es="Con el plan mensual nos encargamos de todo. Si prefiere no pagar mensualidad, le entregamos los archivos y usted lo publica donde quiera.">With the monthly plan we take care of it. If you'd rather not pay monthly, we hand you the files and you can host it anywhere.</p>
+        </details>
+        <details>
+          <summary data-es="¿Puedo pedir cambios después?">Can I make changes later?</summary>
+          <p data-es="Sí. Con el plan mensual los cambios pequeños están incluidos: nos manda la foto o el texto por WhatsApp y lo actualizamos. Sin plan, cotizamos cada cambio.">Yes. Small changes are included in the monthly plan: send the photo or text on WhatsApp and we update it. Without the plan, we quote each change.</p>
+        </details>
+        <details>
+          <summary data-es="¿Cómo se paga?">How does payment work?</summary>
+          <p data-es="La vista previa es gratis. Si le gusta, paga 50% por adelantado y el otro 50% después del lanzamiento. Aceptamos tarjeta, Apple Pay y Google Pay con pago seguro.">The preview is free. If you like it, you pay 50% upfront and the other 50% after launch. We take card, Apple Pay and Google Pay through a secure checkout.</p>
+        </details>
+        <details>
+          <summary data-es="¿Cuánto tarda?">How long does it take?</summary>
+          <p data-es="De 3 a 5 días después de recibir sus fotos y datos. La vista previa se la mandamos antes.">3 to 5 days after we get your photos and details. You see the preview before that.</p>
+        </details>
+        <details>
+          <summary data-es="¿Hacen tiendas en línea o sitios grandes?">Do you build online stores or big websites?</summary>
+          <p data-es="No. Hacemos sitios simples de una sola página para negocios locales: servicios, fotos, reseñas y un botón para llamar. No hacemos tiendas, cuentas de usuario ni sitios complicados.">No. We build simple one-page sites for local businesses: services, photos, reviews and a call button. We don't do online stores, customer logins or complicated sites.</p>
+        </details>
+        <details>
+          <summary data-es="¿Hablan español?">Do you speak Spanish?</summary>
+          <p data-es="Sí, puede escribirnos en español o en inglés.">Yes, message us in Spanish or English.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <h2 data-es="Vea su sitio antes de pagar.">See your site before you pay.</h2>
+      <p class="lead" data-es="Mándenos el nombre de su negocio o su enlace de Google Maps. Le respondemos con una vista previa.">Send us your business name or Google Maps link. We'll reply with a preview.</p>
+      <div class="contact-row">
+        <a class="btn btn-wa wa-link" href="https://wa.me/1XXXXXXXXXX" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>
+          <span data-es="Escríbanos por WhatsApp">Message us on WhatsApp</span>
+        </a>
+        <a class="contact-mail" data-email hidden></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span data-year>2026</span> <span class="studio-name">Crew Sites</span></span>
+    <span data-es="Sitios web para contratistas en Houston, TX">Websites for contractors in Houston, TX</span>
+  </div>
+</footer>
+
+<a class="btn btn-wa float-wa wa-link" href="https://wa.me/1XXXXXXXXXX" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>
+  <span data-es="Escríbanos por WhatsApp">Message us on WhatsApp</span>
+</a>
+
+<script>
+(function () {
+  "use strict";
+  var S = window.STUDIO;
+  var WA_TEXT = {
+    site: { en: "Hi! I'd like a free preview of my website.", es: "¡Hola! Quiero una vista previa gratis de mi sitio web." },
+    maps: { en: "Hi! I'd like Google Maps Boost for my business.", es: "¡Hola! Quiero Google Maps Boost para mi negocio." }
+  };
+  var lang = "en";
+
+  var fromUrl = new URLSearchParams(location.search).get("lang");
+  if (fromUrl === "es" || fromUrl === "en") {
+    lang = fromUrl;
+  } else {
+    try { if (localStorage.getItem("studio-lang") === "es") lang = "es"; } catch (e) { /* storage blocked: stay on English */ }
+  }
+
+  function fillStatic() {
+    document.querySelectorAll(".studio-name").forEach(function (el) { el.textContent = S.name; });
+    var num = String(S.whatsapp).replace(/\D/g, "");
+    document.querySelectorAll(".wa-link").forEach(function (a) {
+      a.href = "https://wa.me/" + num + "?text=" + encodeURIComponent(WA_TEXT[a.dataset.wa || "site"][lang]);
+    });
+    document.querySelectorAll("[data-example]").forEach(function (a) {
+      var url = S.examples[a.dataset.example];
+      if (url) a.href = url + (lang === "es" ? "?lang=es" : "");
+    });
+    document.querySelectorAll("[data-price]").forEach(function (el) {
+      var value = S.prices && S.prices[el.dataset.price];
+      if (value) el.textContent = value;
+    });
+    var mail = document.querySelector("[data-email]");
+    if (S.email) { mail.href = "mailto:" + S.email; mail.textContent = S.email; mail.hidden = false; }
+    document.querySelector("[data-year]").textContent = new Date().getFullYear();
+    document.title = S.name + (lang === "es" ? " | Sitios web para contratistas" : " | Websites for contractors");
+  }
+
+  function applyLang() {
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-es]").forEach(function (el) {
+      if (el.dataset.en === undefined) el.dataset.en = el.innerHTML;
+      el.innerHTML = lang === "es" ? el.dataset.es : el.dataset.en;
+    });
+    document.querySelector("[data-lang-toggle]").textContent = lang === "es" ? "English" : "Español";
+    fillStatic();
+  }
+
+  /* Sofia demo chat: a scripted example, no real AI behind it. */
+  var CHAT = {
+    en: [
+      { from: "them", text: "Hi, I need my kitchen painted in Katy" },
+      { from: "sofia", text: "Hi! I'm Sofia, Brushline Painting's assistant 👋 Happy to help. Just the walls, or the cabinets too?" },
+      { from: "them", text: "Walls and ceiling. About 200 sq ft" },
+      { from: "sofia", text: "Got it. Can you send a photo of the kitchen? It helps us give you an accurate price." },
+      { from: "photo" },
+      { from: "sofia", text: "Thanks! We can come by for a free estimate. Does Thursday at 5pm or Saturday at 10am work?" },
+      { from: "them", text: "Thursday 5pm works" },
+      { from: "booked", text: "✅ Estimate booked: Thu 5pm" },
+      { from: "note", title: "Sent to the owner", text: "New lead: kitchen painting, Katy. Estimate Thu 5pm, photo attached." }
+    ],
+    es: [
+      { from: "them", text: "Hola, necesito pintar mi cocina en Katy" },
+      { from: "sofia", text: "¡Hola! Soy Sofia, la asistente de Brushline Painting 👋 Con gusto le ayudo. ¿Solo paredes o también los gabinetes?" },
+      { from: "them", text: "Paredes y techo. Como 200 pies cuadrados" },
+      { from: "sofia", text: "Perfecto. ¿Me manda una foto de la cocina? Así le damos un precio más exacto." },
+      { from: "photo" },
+      { from: "sofia", text: "¡Gracias! Podemos ir a darle un presupuesto gratis. ¿Le queda bien el jueves a las 5pm o el sábado a las 10am?" },
+      { from: "them", text: "El jueves a las 5pm" },
+      { from: "booked", text: "✅ Presupuesto agendado: jue 5pm" },
+      { from: "note", title: "Enviado al dueño", text: "Nuevo cliente: pintura de cocina, Katy. Presupuesto jue 5pm, foto adjunta." }
+    ]
+  };
+  var TYPING_MS = 1100;   // how long Sofia "types"
+  var PAUSE_MS = 900;     // pause before the customer's next message
+  var chatBody = document.querySelector("[data-chat-body]");
+  // ?chat=done shows the whole conversation at once (for screenshots); reduced motion does the same
+  var showAllAtOnce = window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+    new URLSearchParams(location.search).get("chat") === "done";
+  var chatRun = 0;
+  var chatStarted = false;
+
+  function bubble(step) {
+    var el = document.createElement("div");
+    var kind = step.from === "them" || step.from === "photo" ? "msg-them" : "msg-sofia";
+    el.className = "msg " + kind + (step.from === "photo" ? " msg-photo" : "") +
+      (step.from === "booked" ? " msg-booked" : "") + (step.from === "note" ? " msg-note" : "");
+    if (step.from === "photo") {
+      var img = document.createElement("span");
+      img.textContent = "📷";
+      img.setAttribute("aria-label", "Photo");
+      el.appendChild(img);
+    } else if (step.from === "note") {
+      var title = document.createElement("b");
+      title.textContent = step.title;
+      el.appendChild(title);
+      el.appendChild(document.createTextNode(step.text));
+    } else {
+      el.textContent = step.text;
+    }
+    return el;
+  }
+
+  function addToChat(el) {
+    chatBody.appendChild(el);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  function wait(ms, run) {
+    return new Promise(function (resolve, reject) {
+      setTimeout(function () { return run === chatRun ? resolve() : reject(); }, ms);
+    });
+  }
+
+  function playChat() {
+    chatStarted = true;
+    var run = ++chatRun;
+    var steps = CHAT[lang];
+    chatBody.textContent = "";
+    if (showAllAtOnce) {
+      chatBody.style.scrollBehavior = "auto";
+      steps.forEach(function (s) { addToChat(bubble(s)); });
+      return;
+    }
+    steps.reduce(function (chain, step) {
+      return chain.then(function () {
+        if (step.from === "them" || step.from === "photo") {
+          return wait(PAUSE_MS, run).then(function () { addToChat(bubble(step)); });
+        }
+        var typing = document.createElement("div");
+        typing.className = "typing";
+        typing.innerHTML = "<i></i><i></i><i></i>";
+        addToChat(typing);
+        return wait(TYPING_MS, run).then(function () { typing.remove(); addToChat(bubble(step)); });
+      });
+    }, wait(300, run)).catch(function () { /* a newer run replaced this one */ });
+  }
+
+  document.querySelector("[data-chat-replay]").addEventListener("click", playChat);
+
+  if (showAllAtOnce) {
+    playChat();
+  } else if ("IntersectionObserver" in window) {
+    var chatObserver = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) { chatObserver.disconnect(); playChat(); }
+    }, { threshold: 0.35 });
+    chatObserver.observe(chatBody);
+  } else {
+    playChat();
+  }
+
+  document.querySelector("[data-lang-toggle]").addEventListener("click", function () {
+    lang = lang === "es" ? "en" : "es";
+    try { localStorage.setItem("studio-lang", lang); } catch (e) { /* storage blocked */ }
+    applyLang();
+    if (chatStarted) playChat();
+  });
+
+  applyLang();
+})();
+</script>
+</body>
+</html>
