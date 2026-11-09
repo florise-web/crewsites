@@ -297,6 +297,79 @@ window.STUDIO = {
 
   .float-wa { position:fixed; left:16px; right:16px; bottom:calc(14px + env(safe-area-inset-bottom)); z-index:30; box-shadow:0 12px 30px -10px rgba(20,28,36,.5); }
 
+  /* icons */
+  .ico { width:52px; height:52px; border-radius:14px; background:#DCE3FB; color:var(--blue); display:grid; place-items:center; flex:none; }
+  .ico svg { width:26px; height:26px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+  .step .ico { margin-bottom:14px; }
+  .step:last-child .ico { background:#FFE1D7; color:var(--marker); }
+  .inc-list li { display:flex; gap:16px; align-items:flex-start; padding:18px 0; }
+  .inc-list li::before { display:none; }
+  .inc-list .ico { width:44px; height:44px; border-radius:12px; }
+  .inc-list .ico svg { width:22px; height:22px; }
+
+  /* hero: three phones in a fan */
+  .fan { position:relative; width:300px; height:410px; }
+  .fan .phone { position:absolute; width:140px; padding:6px; border-radius:26px; box-shadow:0 24px 44px -22px rgba(20,28,36,.6); }
+  .fan .phone img { border-radius:20px; }
+  .fan .f1 { left:0; top:56px; transform:rotate(-9deg); z-index:1; }
+  .fan .f2 { left:66px; top:0; width:168px; z-index:3; }
+  .fan .f3 { right:0; top:56px; transform:rotate(9deg); z-index:2; }
+
+  /* people photos */
+  .crews { padding:0 0 72px; }
+  .crew-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .crew-grid figure { margin:0; border-radius:20px; overflow:hidden; background:var(--rule); }
+  .crew-grid img { width:100%; height:100%; object-fit:cover; }
+  .crew-grid .c-wide { grid-column:1 / 3; aspect-ratio:3/2; order:-1; }
+  .crew-grid .c-tall { aspect-ratio:4/5; }
+  .photo-banner { margin:0 0 40px; border-radius:22px; overflow:hidden; }
+  .photo-banner img { width:100%; aspect-ratio:16/9; object-fit:cover; object-position:50% 30%; }
+
+  /* laptop + phone mockup */
+  .devices { position:relative; width:min(100%, 760px); margin:0 auto 64px; padding-bottom:16px; }
+  .laptop-screen { border:10px solid var(--ink); border-bottom-width:12px; border-radius:16px 16px 0 0; background:#000; overflow:hidden; box-shadow:0 30px 60px -34px rgba(20,28,36,.6); }
+  .laptop-screen img { width:100%; height:auto; aspect-ratio:1100/687; object-fit:cover; }
+  .laptop-base { height:14px; width:108%; margin-left:-4%; background:linear-gradient(#D9DDE2, #A9AFB7); border-radius:0 0 18px 18px; position:relative; }
+  .laptop-base::before { content:""; position:absolute; left:50%; top:0; width:18%; height:6px; transform:translateX(-50%); background:#8E959D; border-radius:0 0 8px 8px; }
+  .devices .phone { position:absolute; right:-2%; bottom:0; width:23%; padding:5px; border-radius:20px; box-shadow:0 24px 44px -20px rgba(20,28,36,.7); }
+  .devices .phone img { border-radius:15px; }
+
+  /* gallery */
+  .gallery { background:var(--white); }
+  .gal { display:grid; grid-auto-flow:column; grid-auto-columns:62%; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; scroll-padding-inline:16px; padding:4px 16px 18px; margin:0 -16px; }
+  .gal-card { scroll-snap-align:start; display:flex; flex-direction:column; gap:12px; text-decoration:none; }
+  .gal-shot { border-radius:20px; padding:7px; background:var(--ink); box-shadow:0 22px 40px -26px rgba(20,28,36,.55); transition:transform .2s; }
+  .gal-shot img { border-radius:14px; width:100%; aspect-ratio:1/1.1; object-fit:cover; object-position:top; }
+  .gal-card:hover .gal-shot { transform:translateY(-4px); }
+  .gal-card b { font-size:19px; font-stretch:108%; }
+  .gal-card .open { color:var(--blue); font-weight:700; font-size:15px; text-decoration:underline; text-underline-offset:3px; }
+  .gal-card b + .open { margin-top:-8px; }
+
+  /* faq with photo */
+  .faq-grid { display:grid; gap:36px; }
+  .faq-photo { margin:0; border-radius:22px; overflow:hidden; }
+  .faq-photo img { width:100%; aspect-ratio:16/10; object-fit:cover; object-position:50% 22%; }
+
+  /* real photos inside the Google listing mock */
+  .gmb-photos .p1 { background:linear-gradient(0deg, rgba(20,28,36,.5), rgba(20,28,36,0) 60%), url(img/gmb-kitchen.webp) center/cover; }
+  .gmb-photos .p2 { background:linear-gradient(0deg, rgba(20,28,36,.5), rgba(20,28,36,0) 60%), url(img/gmb-exterior.webp) center/cover; }
+  .gmb-photos .p3 { background:linear-gradient(0deg, rgba(20,28,36,.5), rgba(20,28,36,0) 60%), url(img/gmb-living.webp) center/cover; }
+
+  @media (min-width: 880px) {
+    .fan { width:400px; height:520px; }
+    .fan .phone { width:176px; padding:8px; border-radius:30px; }
+    .fan .phone img { border-radius:22px; }
+    .fan .f1 { top:72px; } .fan .f3 { top:72px; }
+    .fan .f2 { left:90px; width:216px; }
+    .crew-grid { grid-template-columns:1fr 1.7fr 1fr; gap:18px; height:400px; }
+    .crew-grid .c-wide { grid-column:auto; grid-row:auto; aspect-ratio:auto; order:0; }
+    .crew-grid .c-tall { aspect-ratio:auto; }
+    .photo-banner img { aspect-ratio:21/8; }
+    .gal { grid-auto-flow:row; grid-template-columns:repeat(3, 1fr); overflow:visible; padding:0; margin:0; gap:36px 28px; }
+    .gal-shot img { aspect-ratio:5/4; }
+    .faq-grid { grid-template-columns:minmax(0, 1fr) 340px; gap:56px; align-items:start; }
+    .faq-photo img { aspect-ratio:4/5; object-position:50% 30%; }
+  }
   @media (min-width: 880px) {
     section { padding:120px 0; }
     .navlink { display:inline; }
@@ -366,10 +439,22 @@ window.STUDIO = {
         </ul>
       </div>
       <div class="spec" aria-hidden="true">
-        <div class="phone"><img src="img/painting.jpg" alt="" width="375" height="812"></div>
+        <div class="fan">
+          <div class="phone f1"><img src="img/hero-1.webp" alt="" width="360" height="779"></div>
+          <div class="phone f3"><img src="img/hero-3.webp" alt="" width="360" height="779"></div>
+          <div class="phone f2"><img src="img/hero-2.webp" alt="" width="360" height="779" fetchpriority="high"></div>
+        </div>
         <div class="dim dim-v"><span data-es="3–5 días">3–5 days</span></div>
         <div class="dim dim-h"><span data-es="desde <span data-price=&quot;starter&quot;>$497</span>">from <span data-price="starter">$497</span></span></div>
       </div>
+    </div>
+  </section>
+
+  <section class="crews" aria-label="Crews at work">
+    <div class="wrap crew-grid">
+      <figure class="c-tall"><img src="img/crew-painter.webp" alt="Painter rolling paint onto a wall from a scaffold" width="800" height="1000" loading="lazy"></figure>
+      <figure class="c-wide"><img src="img/crew-ladder.webp" alt="Two painters on ladders working on the front of a house" width="1000" height="667" loading="lazy"></figure>
+      <figure class="c-tall"><img src="img/crew-concrete.webp" alt="Crew member guiding a concrete pour" width="800" height="1000" loading="lazy"></figure>
     </div>
   </section>
 
@@ -396,14 +481,17 @@ window.STUDIO = {
       <p class="lead" data-es="No necesita saber nada de computadoras. Todo se arregla por {channel}.">You don't need to know anything about computers. We handle it all over {channel}.</p>
       <ol class="step-list">
         <li class="step">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span>
           <h3 data-es="Hacemos una vista previa gratis">We build a free preview</h3>
           <p data-es="Tomamos su perfil de Google Maps, sus reseñas y su ciudad, y le mandamos un sitio de muestra con su teléfono y sus zonas. Sin pagar nada.">We take your Google Maps listing, reviews and city, and send you a sample site with your phone and your service areas. You pay nothing for it.</p>
         </li>
         <li class="step">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8.5 10.5l2.5 2.5 4.5-4.5"/></svg></span>
           <h3 data-es="Usted lo aprueba">You approve it</h3>
           <p data-es="Nos dice qué cambiar: textos, fotos, servicios, colores. Ajustamos hasta que le guste.">Tell us what to change: text, photos, services, colors. We adjust until you like it.</p>
         </li>
         <li class="step">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 3L3 10.5l7 2.5 2.5 7z"/><path d="M10 13l4-4"/></svg></span>
           <h3 data-es="Queda en línea">It's live</h3>
           <p data-es="Lo publicamos con su dominio y lo conectamos a Google para que los clientes lo encuentren.">We publish it on your domain and connect it to Google so customers can find you.</p>
         </li>
@@ -415,6 +503,11 @@ window.STUDIO = {
     <div class="wrap">
       <h2 data-es="Ejemplos">Recent sites</h2>
       <p class="lead" data-es="Así se ven en el teléfono, donde los abren la mayoría de los clientes.">This is how they look on a phone, where most of your customers will open them.</p>
+      <figure class="devices">
+        <div class="laptop-screen"><img src="img/laptop-painting.webp" alt="A Crew Sites painting website on a laptop" width="1100" height="687" loading="lazy"></div>
+        <div class="laptop-base" aria-hidden="true"></div>
+        <div class="phone"><img src="img/phone-painting.webp" alt="The same website on a phone" width="300" height="650" loading="lazy"></div>
+      </figure>
       <div class="work-list">
         <a class="work-card" data-example="painting" href="examples/painting/index.html" target="_blank" rel="noopener">
           <div class="phone"><img src="img/painting.jpg" alt="Painting company website on a phone" width="375" height="812" loading="lazy"></div>
@@ -436,19 +529,74 @@ window.STUDIO = {
     </div>
   </section>
 
+  <section class="gallery" id="gallery">
+    <div class="wrap">
+      <h2 data-es="Nuestro trabajo">Our work</h2>
+      <p class="lead" data-es="Vistas previas para cuadrillas de distintos oficios. Toque una para abrirla.">Preview sites for crews in different trades. Tap one to open it.</p>
+      <div class="gal">
+        <a class="gal-card" href="preview/cjr-painting/" target="_blank" rel="noopener">
+          <div class="gal-shot"><img src="img/g-painting.webp" alt="Painting website preview on a phone" width="300" height="649" loading="lazy"></div>
+          <b data-es="Pintura">Painting</b>
+          <span class="open" data-es="Abrir el sitio">Open the site</span>
+        </a>
+        <a class="gal-card" href="preview/apr-all-phase-remodeling/" target="_blank" rel="noopener">
+          <div class="gal-shot"><img src="img/g-remodeling.webp" alt="Remodeling website preview on a phone" width="300" height="649" loading="lazy"></div>
+          <b data-es="Remodelación">Remodeling</b>
+          <span class="open" data-es="Abrir el sitio">Open the site</span>
+        </a>
+        <a class="gal-card" href="preview/djw-concrete/" target="_blank" rel="noopener">
+          <div class="gal-shot"><img src="img/g-concrete.webp" alt="Concrete website preview on a phone" width="300" height="649" loading="lazy"></div>
+          <b data-es="Concreto">Concrete</b>
+          <span class="open" data-es="Abrir el sitio">Open the site</span>
+        </a>
+        <a class="gal-card" href="preview/clear-lake-fencing/" target="_blank" rel="noopener">
+          <div class="gal-shot"><img src="img/g-fencing.webp" alt="Fencing website preview on a phone" width="300" height="649" loading="lazy"></div>
+          <b data-es="Cercas">Fencing</b>
+          <span class="open" data-es="Abrir el sitio">Open the site</span>
+        </a>
+        <a class="gal-card" href="preview/j-and-l-luxury-flooring-houston/" target="_blank" rel="noopener">
+          <div class="gal-shot"><img src="img/g-flooring.webp" alt="Flooring website preview on a phone" width="300" height="649" loading="lazy"></div>
+          <b data-es="Pisos">Flooring</b>
+          <span class="open" data-es="Abrir el sitio">Open the site</span>
+        </a>
+        <a class="gal-card" href="preview/stamped-patio-solutions/" target="_blank" rel="noopener">
+          <div class="gal-shot"><img src="img/g-patio.webp" alt="Patios and stamped concrete website preview on a phone" width="300" height="649" loading="lazy"></div>
+          <b data-es="Patios y concreto estampado">Patios &amp; stamped concrete</b>
+          <span class="open" data-es="Abrir el sitio">Open the site</span>
+        </a>
+        <a class="gal-card" href="preview/mendoza-services-handyman/" target="_blank" rel="noopener">
+          <div class="gal-shot"><img src="img/g-handyman.webp" alt="Handyman website preview on a phone" width="300" height="649" loading="lazy"></div>
+          <b data-es="Reparaciones">Handyman</b>
+          <span class="open" data-es="Abrir el sitio">Open the site</span>
+        </a>
+        <a class="gal-card" href="preview/urbano-masonry/" target="_blank" rel="noopener">
+          <div class="gal-shot"><img src="img/g-masonry.webp" alt="Masonry website preview on a phone" width="300" height="649" loading="lazy"></div>
+          <b data-es="Albañilería">Masonry</b>
+          <span class="open" data-es="Abrir el sitio">Open the site</span>
+        </a>
+        <a class="gal-card" href="preview/armando-s-concrete/" target="_blank" rel="noopener">
+          <div class="gal-shot"><img src="img/g-concreto-es.webp" alt="Concrete, Spanish site website preview on a phone" width="300" height="649" loading="lazy"></div>
+          <b data-es="Concreto, sitio en español">Concrete, Spanish site</b>
+          <span class="open" data-es="Abrir el sitio">Open the site</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <section class="inc" id="included">
     <div class="wrap">
       <h2 data-es="Qué incluye">What's included</h2>
       <p class="lead" data-es="Todo lo que necesita un cliente para confiar en usted y llamar.">Everything a customer needs to trust you and call.</p>
+      <figure class="photo-banner"><img src="img/crew-roofer.webp" alt="Roofer at work on a house roof" width="1000" height="667" loading="lazy"></figure>
       <ul class="inc-list">
-        <li data-es="<b>Botones de llamar y {channel}</b><span>Siempre visibles en el teléfono, a un toque.</span>"><b>Call and {channel} buttons</b><span>Always on screen on a phone, one tap away.</span></li>
-        <li data-es="<b>Sus servicios y fotos de trabajos</b><span>Lo que hace, con fotos reales de sus proyectos.</span>"><b>Your services and job photos</b><span>What you do, with real photos of your projects.</span></li>
-        <li data-es="<b>Reseñas de Google</b><span>Sus mejores reseñas en la página principal.</span>"><b>Google reviews</b><span>Your best reviews on the main page.</span></li>
-        <li data-es="<b>Zonas donde trabaja</b><span>Los barrios de Houston que cubre, para salir en búsquedas locales.</span>"><b>Areas you serve</b><span>The Houston neighborhoods you cover, so you show up in local searches.</span></li>
-        <li data-es="<b>Formulario de presupuesto</b><span>Las solicitudes le llegan directo al teléfono o correo.</span>"><b>Free estimate form</b><span>Requests come straight to your phone or email.</span></li>
-        <li data-es="<b>Inglés y español</b><span>Un botón cambia el idioma de todo el sitio.</span>"><b>English and Spanish</b><span>One button switches the whole site.</span></li>
-        <li data-es="<b>Conexión con Google</b><span>Lo enlazamos con su perfil de Google Maps.</span>"><b>Connected to Google</b><span>We link it to your Google Maps profile.</span></li>
-        <li data-es="<b>Rápido en cualquier teléfono</b><span>Carga en segundos, aunque la señal sea mala.</span>"><b>Fast on any phone</b><span>Loads in seconds, even on a weak signal.</span></li>
+        <li><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg></span><div data-es="<b>Botones de llamar y {channel}</b><span>Siempre visibles en el teléfono, a un toque.</span>"><b>Call and {channel} buttons</b><span>Always on screen on a phone, one tap away.</span></div></li>
+        <li><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.5"/><path d="M21 16l-5-5-8 9"/></svg></span><div data-es="<b>Sus servicios y fotos de trabajos</b><span>Lo que hace, con fotos reales de sus proyectos.</span>"><b>Your services and job photos</b><span>What you do, with real photos of your projects.</span></div></li>
+        <li><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l2.8 5.9 6.2.9-4.5 4.4 1.1 6.3-5.6-3-5.6 3 1.1-6.3L3 9.8l6.2-.9z"/></svg></span><div data-es="<b>Reseñas de Google</b><span>Sus mejores reseñas en la página principal.</span>"><b>Google reviews</b><span>Your best reviews on the main page.</span></div></li>
+        <li><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span><div data-es="<b>Zonas donde trabaja</b><span>Los barrios de Houston que cubre, para salir en búsquedas locales.</span>"><b>Areas you serve</b><span>The Houston neighborhoods you cover, so you show up in local searches.</span></div></li>
+        <li><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></span><div data-es="<b>Formulario de presupuesto</b><span>Las solicitudes le llegan directo al teléfono o correo.</span>"><b>Free estimate form</b><span>Requests come straight to your phone or email.</span></div></li>
+        <li><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></span><div data-es="<b>Inglés y español</b><span>Un botón cambia el idioma de todo el sitio.</span>"><b>English and Spanish</b><span>One button switches the whole site.</span></div></li>
+        <li><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1M14 10a4 4 0 00-5.7 0l-3 3a4 4 0 005.7 5.7l1-1"/></svg></span><div data-es="<b>Conexión con Google</b><span>Lo enlazamos con su perfil de Google Maps.</span>"><b>Connected to Google</b><span>We link it to your Google Maps profile.</span></div></li>
+        <li><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 2L5 13h6l-1 9 8-11h-6z"/></svg></span><div data-es="<b>Rápido en cualquier teléfono</b><span>Carga en segundos, aunque la señal sea mala.</span>"><b>Fast on any phone</b><span>Loads in seconds, even on a weak signal.</span></div></li>
       </ul>
     </div>
   </section>
@@ -653,6 +801,7 @@ window.STUDIO = {
     <div class="wrap">
       <h2 data-es="Preguntas frecuentes">Questions</h2>
       <p class="lead" data-es="Si no ve su pregunta, escríbanos.">Don't see yours? Just message us.</p>
+      <div class="faq-grid">
       <div class="faq-list">
         <details>
           <summary data-es="¿Necesito un dominio?">Do I need a domain?</summary>
@@ -682,6 +831,8 @@ window.STUDIO = {
           <summary data-es="¿Hablan español?">Do you speak Spanish?</summary>
           <p data-es="Sí, puede escribirnos en español o en inglés.">Yes, message us in Spanish or English.</p>
         </details>
+      </div>
+      <figure class="faq-photo"><img src="img/crew-kitchen.webp" alt="Contractor finishing the trim in a kitchen" width="800" height="1000" loading="lazy"></figure>
       </div>
     </div>
   </section>
