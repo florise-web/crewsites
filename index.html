@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Crew Sites | Websites for contractors</title>
-<meta name="description" content="Simple one-page websites for painting, remodeling and concrete crews, plus Google Maps setup. Get more calls from Google. Ready in 3–5 days.">
+<meta name="description" content="Websites, AI assistants and chatbots, and Google Maps setup for painting, remodeling and concrete crews. Get more calls from Google. Ready in 3–5 days.">
 
 <!-- ============================================================
-     НАСТРОЙКИ СТУДИИ. Название, номер WhatsApp и ссылки на примеры
+     НАСТРОЙКИ СТУДИИ. Название, канал связи (Messenger/WhatsApp) и ссылки на примеры
      меняются только здесь. Название подставится по всей странице.
      (В <title> выше и в noscript можно поменять вручную, но JS и так
      перепишет заголовок вкладки.)
@@ -15,7 +15,12 @@
 <script>
 window.STUDIO = {
   name: "Crew Sites",
-  whatsapp: "1XXXXXXXXXX",            // номер: 1 + 10 цифр без пробелов, например 17135550100
+  contact: {                           // КАНАЛ СВЯЗИ: на него ведут все кнопки «написать»
+    channel: "messenger",              // "messenger" сейчас; "whatsapp", когда появится номер
+    label: "Messenger",                // слово на кнопках: "Messenger" или "Facebook"
+    url: "https://m.me/61596028336448", // Messenger страницы Crew Sites (страница: facebook.com/profile.php?id=61596028336448)
+    whatsapp: "1XXXXXXXXXX"            // для channel "whatsapp": 1 + 10 цифр без пробелов
+  },
   email: "",                           // если пусто, почта на сайте не показывается
   prices: {                            // ЦЕНЫ: меняются только здесь, на странице подставятся сами
     starter: "$497",
@@ -62,7 +67,7 @@ window.STUDIO = {
   .btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:56px; padding:16px 26px; border-radius:999px; font:inherit; font-weight:700; font-size:18px; text-decoration:none; border:0; cursor:pointer; }
   .btn svg { width:22px; height:22px; flex:none; }
   .btn-wa { background:var(--wa); color:#fff; }
-  .btn-wa:hover { background:#18914A; }
+  .btn-wa:hover { filter:brightness(.92); }
 
   /* header */
   .top { position:sticky; top:0; z-index:20; background:rgba(242,243,239,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--rule); }
@@ -349,10 +354,10 @@ window.STUDIO = {
     <div class="wrap">
       <div>
         <h1 data-es="Más llamadas desde Google.">Get more calls from Google.</h1>
-        <p class="hero-sub" data-es="Hacemos sitios web simples y rápidos de una sola página para pintores, remodeladores y concreteros en Houston. En la primera pantalla: su teléfono a un toque, las zonas donde trabaja y sus reseñas de Google.">We build simple, fast one-page websites for painting, remodeling and concrete crews in Houston. On the first screen: your phone one tap away, the areas you serve and your Google reviews.</p>
+        <p class="hero-sub" data-es="Hacemos sitios web rápidos, asistentes con IA y chatbots, y configuramos su ficha de Google Maps, para pintores, remodeladores y concreteros en Houston. En la primera pantalla de su sitio: su teléfono a un toque, las zonas donde trabaja y sus reseñas de Google.">We build fast websites, AI assistants and chatbots, and set up your Google Maps listing, for painting, remodeling and concrete crews in Houston. On the first screen of your site: your phone one tap away, the areas you serve and your Google reviews.</p>
         <a class="btn btn-wa wa-link" href="https://wa.me/1XXXXXXXXXX" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>
-          <span data-es="Escríbanos por WhatsApp">Message us on WhatsApp</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3C6.5 3 2 6.9 2 11.7c0 2.7 1.4 5 3.6 6.6V22l3.3-1.8c1 .3 2 .4 3.1.4 5.5 0 10-3.9 10-8.9S17.5 3 12 3z"/></svg>
+          <span data-es="Escríbanos por {channel}">Message us on {channel}</span>
         </a>
         <ul class="hero-meta">
           <li data-es="Desde <b data-price=&quot;starter&quot;>$497</b>, pago único">From <b data-price="starter">$497</b>, one-time</li>
@@ -388,7 +393,7 @@ window.STUDIO = {
   <section class="steps" id="how">
     <div class="wrap">
       <h2 data-es="Cómo funciona">How it works</h2>
-      <p class="lead" data-es="No necesita saber nada de computadoras. Todo se arregla por WhatsApp.">You don't need to know anything about computers. We handle it all over WhatsApp.</p>
+      <p class="lead" data-es="No necesita saber nada de computadoras. Todo se arregla por {channel}.">You don't need to know anything about computers. We handle it all over {channel}.</p>
       <ol class="step-list">
         <li class="step">
           <h3 data-es="Hacemos una vista previa gratis">We build a free preview</h3>
@@ -436,7 +441,7 @@ window.STUDIO = {
       <h2 data-es="Qué incluye">What's included</h2>
       <p class="lead" data-es="Todo lo que necesita un cliente para confiar en usted y llamar.">Everything a customer needs to trust you and call.</p>
       <ul class="inc-list">
-        <li data-es="<b>Botones de llamar y WhatsApp</b><span>Siempre visibles en el teléfono, a un toque.</span>"><b>Call and WhatsApp buttons</b><span>Always on screen on a phone, one tap away.</span></li>
+        <li data-es="<b>Botones de llamar y {channel}</b><span>Siempre visibles en el teléfono, a un toque.</span>"><b>Call and {channel} buttons</b><span>Always on screen on a phone, one tap away.</span></li>
         <li data-es="<b>Sus servicios y fotos de trabajos</b><span>Lo que hace, con fotos reales de sus proyectos.</span>"><b>Your services and job photos</b><span>What you do, with real photos of your projects.</span></li>
         <li data-es="<b>Reseñas de Google</b><span>Sus mejores reseñas en la página principal.</span>"><b>Google reviews</b><span>Your best reviews on the main page.</span></li>
         <li data-es="<b>Zonas donde trabaja</b><span>Los barrios de Houston que cubre, para salir en búsquedas locales.</span>"><b>Areas you serve</b><span>The Houston neighborhoods you cover, so you show up in local searches.</span></li>
@@ -460,7 +465,7 @@ window.STUDIO = {
             <li data-es="Un sitio de una sola página">One simple one-page website</li>
             <li data-es="Servicios, fotos y reseñas en la misma página">Services, photos and reviews on that page</li>
             <li data-es="Hecho para el teléfono">Built for phones</li>
-            <li data-es="Botones de llamar y WhatsApp">Call and WhatsApp buttons</li>
+            <li data-es="Botones de llamar y {channel}">Call and {channel} buttons</li>
           </ul>
           <a class="btn btn-line wa-link" href="https://wa.me/1XXXXXXXXXX" target="_blank" rel="noopener"><span data-es="Elegir Starter">Choose Starter</span></a>
         </div>
@@ -575,7 +580,7 @@ window.STUDIO = {
       <div class="sofia-top">
         <div class="sofia-copy">
           <h2 data-es="No vuelva a perder un cliente.">Never miss a lead again.</h2>
-          <p class="sofia-sub" data-es="Conozca a Sofia, su asistente con IA 24/7.">Meet Sofia, your 24/7 AI assistant.</p>
+          <p class="sofia-sub" data-es="Conozca a Sofia, su asistente con IA y chatbot 24/7.">Meet Sofia, your 24/7 AI assistant and chatbot.</p>
           <p class="lead" data-es="Cada llamada que no contesta mientras está en el techo es un trabajo perdido. Casi siempre se queda con el trabajo quien responde primero. Sofia responde en segundos y agenda el presupuesto por usted.">Every call you miss on the roof is a job lost, and the crew that replies first usually gets it. Sofia answers in seconds and books the estimate for you.</p>
           <ul class="sofia-list">
             <li data-es="<b>Responde en 10 segundos</b><span>En el chat de su sitio y en cada solicitud del formulario, de día o de noche.</span>"><b>Answers in 10 seconds</b><span>On your website chat and every form request, day or night.</span></li>
@@ -659,7 +664,7 @@ window.STUDIO = {
         </details>
         <details>
           <summary data-es="¿Puedo pedir cambios después?">Can I make changes later?</summary>
-          <p data-es="Sí. Con el plan mensual los cambios pequeños están incluidos: nos manda la foto o el texto por WhatsApp y lo actualizamos. Sin plan, cotizamos cada cambio.">Yes. Small changes are included in the monthly plan: send the photo or text on WhatsApp and we update it. Without the plan, we quote each change.</p>
+          <p data-es="Sí. Con el plan mensual los cambios pequeños están incluidos: nos manda la foto o el texto por {channel} y lo actualizamos. Sin plan, cotizamos cada cambio.">Yes. Small changes are included in the monthly plan: send the photo or text on {channel} and we update it. Without the plan, we quote each change.</p>
         </details>
         <details>
           <summary data-es="¿Cómo se paga?">How does payment work?</summary>
@@ -687,8 +692,8 @@ window.STUDIO = {
       <p class="lead" data-es="Mándenos el nombre de su negocio o su enlace de Google Maps. Le respondemos con una vista previa.">Send us your business name or Google Maps link. We'll reply with a preview.</p>
       <div class="contact-row">
         <a class="btn btn-wa wa-link" href="https://wa.me/1XXXXXXXXXX" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>
-          <span data-es="Escríbanos por WhatsApp">Message us on WhatsApp</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3C6.5 3 2 6.9 2 11.7c0 2.7 1.4 5 3.6 6.6V22l3.3-1.8c1 .3 2 .4 3.1.4 5.5 0 10-3.9 10-8.9S17.5 3 12 3z"/></svg>
+          <span data-es="Escríbanos por {channel}">Message us on {channel}</span>
         </a>
         <a class="contact-mail" data-email hidden></a>
       </div>
@@ -704,8 +709,8 @@ window.STUDIO = {
 </footer>
 
 <a class="btn btn-wa float-wa wa-link" href="https://wa.me/1XXXXXXXXXX" target="_blank" rel="noopener">
-  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>
-  <span data-es="Escríbanos por WhatsApp">Message us on WhatsApp</span>
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3C6.5 3 2 6.9 2 11.7c0 2.7 1.4 5 3.6 6.6V22l3.3-1.8c1 .3 2 .4 3.1.4 5.5 0 10-3.9 10-8.9S17.5 3 12 3z"/></svg>
+  <span data-es="Escríbanos por {channel}">Message us on {channel}</span>
 </a>
 
 <script>
@@ -718,6 +723,19 @@ window.STUDIO = {
   };
   var lang = "en";
 
+  var C = S.contact || {};
+  var isWhatsApp = C.channel === "whatsapp";
+  var channelLabel = C.label || (isWhatsApp ? "WhatsApp" : "Messenger");
+
+  function contactHref(kind) {
+    if (isWhatsApp) {
+      var num = String(C.whatsapp).replace(/\D/g, "");
+      return "https://wa.me/" + num + "?text=" + encodeURIComponent(WA_TEXT[kind][lang]);
+    }
+    return C.url || "#contact";   // empty url: buttons just scroll to the contact block until the link is set
+  }
+  function withChannel(html) { return html.replace(/\{channel\}/g, channelLabel); }
+
   var fromUrl = new URLSearchParams(location.search).get("lang");
   if (fromUrl === "es" || fromUrl === "en") {
     lang = fromUrl;
@@ -727,9 +745,10 @@ window.STUDIO = {
 
   function fillStatic() {
     document.querySelectorAll(".studio-name").forEach(function (el) { el.textContent = S.name; });
-    var num = String(S.whatsapp).replace(/\D/g, "");
+    document.documentElement.style.setProperty("--wa", isWhatsApp ? "#1FA855" : "#0A7CFF");
     document.querySelectorAll(".wa-link").forEach(function (a) {
-      a.href = "https://wa.me/" + num + "?text=" + encodeURIComponent(WA_TEXT[a.dataset.wa || "site"][lang]);
+      a.href = contactHref(a.dataset.wa || "site");
+      if (!isWhatsApp && !C.url) a.removeAttribute("target");
     });
     document.querySelectorAll("[data-example]").forEach(function (a) {
       var url = S.examples[a.dataset.example];
@@ -749,7 +768,7 @@ window.STUDIO = {
     document.documentElement.lang = lang;
     document.querySelectorAll("[data-es]").forEach(function (el) {
       if (el.dataset.en === undefined) el.dataset.en = el.innerHTML;
-      el.innerHTML = lang === "es" ? el.dataset.es : el.dataset.en;
+      el.innerHTML = withChannel(lang === "es" ? el.dataset.es : el.dataset.en);
     });
     document.querySelector("[data-lang-toggle]").textContent = lang === "es" ? "English" : "Español";
     fillStatic();
