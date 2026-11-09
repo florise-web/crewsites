@@ -308,12 +308,13 @@ window.STUDIO = {
   .inc-list .ico svg { width:22px; height:22px; }
 
   /* hero: three phones in a fan */
-  .fan { position:relative; width:300px; height:410px; }
-  .fan .phone { position:absolute; width:140px; padding:6px; border-radius:26px; box-shadow:0 24px 44px -22px rgba(20,28,36,.6); }
-  .fan .phone img { border-radius:20px; }
-  .fan .f1 { left:0; top:56px; transform:rotate(-9deg); z-index:1; }
-  .fan .f2 { left:66px; top:0; width:168px; z-index:3; }
-  .fan .f3 { right:0; top:56px; transform:rotate(9deg); z-index:2; }
+  .hero .wrap { grid-template-columns:minmax(0, 1fr); }
+  .fan { position:relative; width:262px; height:370px; }
+  .fan .phone { position:absolute; width:122px; padding:5px; border-radius:24px; box-shadow:0 24px 44px -22px rgba(20,28,36,.6); }
+  .fan .phone img { border-radius:19px; }
+  .fan .f1 { left:0; top:50px; transform:rotate(-9deg); z-index:1; }
+  .fan .f2 { left:56px; top:0; width:150px; z-index:3; }
+  .fan .f3 { right:0; top:50px; transform:rotate(9deg); z-index:2; }
 
   /* people photos */
   .crews { padding:0 0 72px; }
@@ -356,6 +357,7 @@ window.STUDIO = {
   .gmb-photos .p3 { background:linear-gradient(0deg, rgba(20,28,36,.5), rgba(20,28,36,0) 60%), url(img/gmb-living.webp) center/cover; }
 
   @media (min-width: 880px) {
+    .hero .wrap { grid-template-columns:minmax(0, 1.3fr) minmax(0, .7fr); }
     .fan { width:400px; height:520px; }
     .fan .phone { width:176px; padding:8px; border-radius:30px; }
     .fan .phone img { border-radius:22px; }
