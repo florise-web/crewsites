@@ -1,15 +1,16 @@
 <!doctype html>
-<html lang="ru">
-<head><meta name="robots" content="noindex, nofollow">
+<html lang="en">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
 <title>Makota Services</title>
 <meta name="description" content="Remodeling &amp; handyman · New York, NY. Call (929) 305-7716.">
 
 <!-- ============================================================
-     ДАННЫЕ БИЗНЕСА. Меняй только этот блок (см. КАК ДЕЛАТЬ МАКЕТ.md).
-     Текст в виде { en: "...", es: "..." } показывается на двух языках.
-     Ссылка ?lang=es в конце адреса сразу открывает испанскую версию.
+     BUSINESS DATA. generate.js rewrites only this block.
+     Texts as { en, es, ru } show in the language the visitor picks (English first for US businesses).
+     ?lang=es at the end of the address opens the Spanish version.
      ============================================================ -->
 <script>
 window.SITE = {
@@ -26,17 +27,19 @@ window.SITE = {
   "email": "",
   "city": "New York, NY",
   "rating": 1,
+  "contact": "sms",
   "langs": [
-    "ru",
-    "en"
+    "en",
+    "ru"
   ],
-  "defaultLang": "ru",
-  "heroStyle": "overlay",
+  "defaultLang": "en",
   "sections": [
     "header",
     "hero",
     "services",
     "gallery",
+    "compare",
+    "process",
     "areas",
     "estimate",
     "footer"
@@ -176,127 +179,40 @@ window.SITE = {
     }
   ],
   "reviews": [],
+  "compare": {
+    "image": "https://images.unsplash.com/photo-1652918320907-f9ec8623ab30?w=2000&q=70&auto=format&fit=crop",
+    "alt": {
+      "en": "Remodeling & handyman",
+      "es": "Remodelación y handyman",
+      "ru": "Ремонт и мастер на час"
+    },
+    "beforeFilter": "sepia(1) saturate(1.6) hue-rotate(-12deg) brightness(.66) contrast(1.02)"
+  },
   "areas": [
-    "New York"
+    "New York",
+    "Brooklyn",
+    "Queens",
+    "Staten Island",
+    "Bronx",
+    "Long Island",
+    "Westchester"
   ],
   "colors": {
-    "accent": "#D9A441",
-    "ink": "#23324A",
-    "paper": "#EEF0F3",
-    "soft": "#E0E4EA"
+    "accent": "#4FA38A",
+    "ink": "#14262B",
+    "paper": "#F8FAF9",
+    "soft": "#E8F0EE"
   }
 };
 </script>
-<!-- ======================= конец данных ======================= -->
+<!-- ======================= end of data ======================= -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
-  :root { --accent:#C9A24D; --ink:#1E3A2F; --paper:#EEF0EA; --soft:#E2E6DC; --text:#1F2622; --muted:#56605A; --line:rgba(30,58,47,.18); }
-  * { box-sizing:border-box; }
-  html { scroll-behavior:smooth; }
-  body { margin:0; font-family:"Instrument Sans", system-ui, sans-serif; color:var(--text); background:var(--paper); font-size:17px; line-height:1.6; }
-  img { display:block; max-width:100%; }
-  a { color:inherit; }
-  .wrap { width:min(1120px, 100% - 32px); margin-inline:auto; }
-  h1,h2,h3 { font-family:"Young Serif", Georgia, serif; font-weight:400; line-height:1.1; margin:0; }
-  h2 { font-size:clamp(30px, 5vw, 46px); color:var(--ink); margin-bottom:32px; }
-  section { padding:76px 0; }
-  :focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
-
-  .btns { display:flex; flex-wrap:wrap; gap:10px; }
-  .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:15px 22px; border-radius:4px; text-decoration:none; border:0; font:inherit; font-weight:600; cursor:pointer; min-height:52px; }
-  .btn svg { width:20px; height:20px; flex:none; }
-  .btn-call { background:var(--accent); color:#1B1A14; }
-  .btn-wa { background:transparent; color:inherit; box-shadow:inset 0 0 0 1.5px currentColor; }
-  .btn:hover { filter:brightness(1.07); }
-
-  #app { position:relative; } /* header sits under the preview bar, not behind it */
-  .site-header { position:absolute; inset:0 0 auto; z-index:20; color:#fff; }
-  .site-header .wrap { display:flex; align-items:center; justify-content:space-between; height:72px; gap:12px; }
-  .logo { font-family:"Young Serif", Georgia, serif; font-size:21px; text-decoration:none; margin:0; }
-  .head-actions { display:flex; align-items:center; gap:14px; }
-  .lang { background:none; border:1px solid rgba(255,255,255,.5); color:inherit; border-radius:4px; padding:7px 12px; font:inherit; font-size:14px; cursor:pointer; }
-  .head-call { display:none; align-items:center; gap:6px; text-decoration:none; font-weight:600; }
-  .head-call svg { width:18px; height:18px; color:var(--accent); }
-
-  .hero { position:relative; min-height:92svh; display:flex; align-items:flex-end; color:#fff; padding:120px 0 48px; }
-  .hero-media { position:absolute; inset:0; }
-  .hero-media img { width:100%; height:100%; object-fit:cover; }
-  .hero-media::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(20,38,31,.62) 0%, rgba(20,38,31,.5) 30%, rgba(20,38,31,.93) 75%); }
-  .hero-body { position:relative; }
-  .hero-kicker { color:#E8CB86; margin:0 0 14px; font-weight:600; }
-  .hero h1 { font-size:clamp(38px, 8vw, 72px); max-width:13em; }
-  .hero-sub { font-size:18px; max-width:32em; color:rgba(255,255,255,.86); margin:18px 0 26px; }
-  .proof { list-style:none; padding:22px 0 0; margin:30px 0 0; border-top:1px solid rgba(255,255,255,.25); display:flex; flex-wrap:wrap; gap:8px 26px; font-size:15px; color:rgba(255,255,255,.8); }
-  .proof b { color:#fff; white-space:nowrap; }
-
-  .service-list { border-top:1px solid var(--line); }
-  .service { padding:22px 0; border-bottom:1px solid var(--line); display:grid; gap:6px; }
-  .service h3 { font-size:24px; color:var(--ink); }
-  .service p { margin:0; color:var(--muted); }
-
-  .reviews { background:var(--ink); color:#F1F3EE; }
-  .reviews h2 { color:#fff; }
-  .review-list { display:grid; gap:36px; }
-  .review { margin:0; }
-  .review .stars { color:var(--accent); letter-spacing:3px; font-size:14px; }
-  .review p { font-family:"Young Serif", Georgia, serif; font-size:22px; line-height:1.4; margin:12px 0 14px; }
-  .review footer { color:rgba(241,243,238,.65); font-size:15px; }
-
-  .gallery-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-  .gallery figure { margin:0; }
-  .gallery figure:first-child { grid-column:1/-1; }
-  .gallery img { width:100%; aspect-ratio:1; object-fit:cover; }
-  .gallery figure:first-child img { aspect-ratio:16/10; }
-  .gallery figcaption { font-size:14px; color:var(--muted); padding-top:8px; }
-
-  .areas { background:var(--soft); }
-  .area-list { list-style:none; margin:0; padding:0; columns:2; column-gap:24px; }
-  .area-list li { padding:9px 0; border-bottom:1px solid var(--line); break-inside:avoid; }
-  .areas-note { color:var(--muted); margin:22px 0 0; }
-
-  .estimate-inner { display:grid; gap:32px; }
-  .estimate-copy p { color:var(--muted); font-size:18px; margin:-16px 0 24px; }
-  .estimate-copy .btn-wa { color:var(--ink); }
-  .estimate-form { display:grid; gap:16px; padding:26px; background:#fff; border-top:4px solid var(--accent); }
-  .estimate-form label { display:grid; gap:6px; font-weight:600; font-size:15px; color:var(--ink); }
-  .estimate-form input, .estimate-form select, .estimate-form textarea { font:inherit; font-weight:400; padding:13px 14px; border:1px solid var(--line); border-radius:4px; background:#FAFBF8; color:var(--text); width:100%; }
-  .btn-send { background:var(--ink); color:#fff; }
-  .form-status { margin:0; padding:12px 14px; font-size:15px; }
-  .form-status.is-ok { background:#E5F0E7; color:#1E4D2B; }
-  .form-status.is-error { background:#F8E7E4; color:#7D2418; }
-
-  .site-footer { background:#15291F; color:rgba(241,243,238,.75); padding:52px 0 112px; font-size:15px; }
-  .site-footer .wrap { display:grid; gap:6px; }
-  .site-footer .logo { color:#fff; margin-bottom:10px; }
-  .site-footer p { margin:0 0 10px; }
-  .fine { font-size:13px; opacity:.7; }
-
-  .mobile-bar { position:fixed; inset:auto 0 0; z-index:30; padding:10px 12px calc(10px + env(safe-area-inset-bottom)); background:var(--ink); }
-  .mobile-bar .btns { display:grid; grid-template-columns:1fr 1fr; }
-  .mobile-bar .btn { min-height:48px; padding:12px; }
-  .mobile-bar .btn-wa { color:#fff; }
-
-  @media (min-width: 860px) {
-    section { padding:112px 0; }
-    .head-call { display:inline-flex; }
-    .hero { padding-bottom:80px; }
-    .service-list { display:grid; grid-template-columns:1fr 1fr; column-gap:56px; border-top:0; }
-    .service { border-top:1px solid var(--line); border-bottom:0; padding:26px 0 30px; }
-    .review-list { grid-template-columns:repeat(3, 1fr); gap:48px; }
-    .gallery-grid { grid-template-columns:2fr 1fr 1fr; grid-template-rows:auto auto; }
-    .gallery figure:first-child { grid-column:1; grid-row:1 / span 2; }
-    .gallery figure:first-child img { aspect-ratio:auto; height:calc(100% - 30px); }
-    .area-list { columns:4; }
-    .estimate-inner { grid-template-columns:1fr 1.1fr; gap:72px; align-items:start; }
-    .site-footer { padding-bottom:52px; }
-    .site-footer .wrap { grid-template-columns:2fr 1.4fr 1.4fr; }
-    .fine { grid-column:1/-1; }
-    .mobile-bar { display:none; }
-  }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+  /* Theme tokens only. Structure lives in templates/base.css (injected by engine.js). */
+  :root { --font: "Hanken Grotesk", system-ui, sans-serif; --radius: 12px; }
 </style>
 </head>
 <body>
