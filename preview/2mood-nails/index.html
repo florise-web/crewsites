@@ -1,15 +1,16 @@
 <!doctype html>
-<html lang="ru">
-<head><meta name="robots" content="noindex, nofollow">
+<html lang="en">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
 <title>2Mood Nails</title>
 <meta name="description" content="Beauty studio · Brooklyn, NY. Call (917) 288-4406.">
 
 <!-- ============================================================
-     ДАННЫЕ БИЗНЕСА. Универсальный шаблон «бьюти и здоровье»: салоны, ногти,
-     ресницы, косметологи, массаж, стоматологи, клиники.
-     Генератор заменяет этот блок целиком.
+     BUSINESS DATA. generate.js rewrites only this block.
+     Texts as { en, es, ru } show in the language the visitor picks (English first for US businesses).
+     ?lang=es at the end of the address opens the Spanish version.
      ============================================================ -->
 <script>
 window.SITE = {
@@ -27,17 +28,18 @@ window.SITE = {
   "city": "Brooklyn, NY",
   "rating": 4.9,
   "reviewCount": 385,
+  "contact": "sms",
   "langs": [
-    "ru",
-    "en"
+    "en",
+    "ru"
   ],
-  "defaultLang": "ru",
-  "heroStyle": "arch",
+  "defaultLang": "en",
   "sections": [
     "header",
     "hero",
     "services",
     "gallery",
+    "process",
     "areas",
     "estimate",
     "footer"
@@ -158,7 +160,12 @@ window.SITE = {
   ],
   "reviews": [],
   "areas": [
-    "Brooklyn"
+    "Brooklyn",
+    "Manhattan",
+    "Queens",
+    "Staten Island",
+    "Bronx",
+    "Long Island"
   ],
   "colors": {
     "accent": "#7E8F7A",
@@ -190,112 +197,14 @@ window.SITE = {
   }
 };
 </script>
-<!-- ======================= конец данных ======================= -->
+<!-- ======================= end of data ======================= -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
 <style>
-  :root { --accent:#B76E79; --ink:#3A2A2E; --paper:#FBF6F2; --soft:#F2E6E0; --text:#2E2427; --muted:#6F5F63; --line:rgba(58,42,46,.15); }
-  * { box-sizing:border-box; }
-  html { scroll-behavior:smooth; }
-  body { margin:0; font-family:"Manrope", system-ui, -apple-system, sans-serif; color:var(--text); background:var(--paper); font-size:17px; line-height:1.65; }
-  img { display:block; max-width:100%; }
-  a { color:inherit; }
-  .wrap { width:min(1080px, 100% - 32px); margin-inline:auto; }
-  h1,h2,h3 { font-family:"Cormorant Garamond", Georgia, serif; font-weight:600; line-height:1.05; margin:0; }
-  h2 { font-size:clamp(34px, 6vw, 52px); color:var(--ink); margin-bottom:28px; }
-  section { padding:72px 0; }
-  :focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
-
-  .btns { display:flex; flex-wrap:wrap; gap:10px; }
-  .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:14px 24px; border-radius:999px; text-decoration:none; border:0; font:inherit; font-weight:600; cursor:pointer; min-height:52px; letter-spacing:.02em; }
-  .btn svg { width:19px; height:19px; flex:none; }
-  .btn-call { background:var(--ink); color:#fff; }
-  .btn-wa { background:transparent; color:var(--ink); box-shadow:inset 0 0 0 1.5px var(--ink); }
-  .btn:hover { filter:brightness(1.08); }
-
-  .site-header { position:relative; z-index:20; }
-  .site-header .wrap { display:flex; align-items:center; justify-content:space-between; min-height:68px; gap:12px; }
-  .logo { font-family:"Cormorant Garamond", Georgia, serif; font-weight:600; font-size:24px; color:var(--ink); text-decoration:none; margin:0; line-height:1.1; }
-  .head-actions { display:flex; align-items:center; gap:14px; flex:none; }
-  .lang { background:none; border:1px solid var(--line); color:var(--ink); border-radius:999px; padding:6px 13px; font:inherit; font-size:14px; cursor:pointer; }
-  .head-call { display:none; align-items:center; gap:6px; text-decoration:none; font-weight:600; color:var(--ink); }
-  .head-call svg { width:17px; height:17px; color:var(--accent); }
-
-  .hero { padding:8px 0 56px; display:flex; flex-direction:column; }
-  .hero .wrap { order:1; text-align:center; }
-  .hero-kicker { color:var(--accent); margin:0 0 10px; font-weight:600; text-transform:uppercase; letter-spacing:.14em; font-size:13px; }
-  .hero h1 { font-size:clamp(40px, 10vw, 76px); color:var(--ink); max-width:12em; margin-inline:auto; }
-  .hero-sub { font-size:17px; max-width:30em; color:var(--muted); margin:14px auto 22px; }
-  .hero .btns { justify-content:center; }
-  .proof { list-style:none; padding:0; margin:20px 0 0; display:flex; flex-wrap:wrap; justify-content:center; gap:6px 20px; font-size:15px; color:var(--muted); }
-  .proof b { color:var(--ink); white-space:nowrap; }
-  .hero-media { order:2; width:min(560px, 100% - 48px); margin:30px auto 0; }
-  .hero-media img { width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:999px 999px 24px 24px; }
-
-  .service-list { border-top:1px solid var(--line); }
-  .service { padding:20px 0; border-bottom:1px solid var(--line); display:grid; gap:4px; }
-  .service h3 { font-size:27px; color:var(--ink); }
-  .service p { margin:0; color:var(--muted); }
-
-  .gallery-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-  .gallery figure { margin:0; }
-  .gallery img { width:100%; aspect-ratio:3/4; object-fit:cover; border-radius:16px; }
-  .gallery figcaption { font-size:14px; color:var(--muted); padding-top:6px; }
-  .pv-gallery-note { color:var(--muted); }
-
-  .reviews { background:var(--soft); }
-  .review-list { display:grid; gap:34px; }
-  .review { margin:0; text-align:center; }
-  .review .stars { color:var(--accent); letter-spacing:4px; font-size:14px; }
-  .review p { font-family:"Cormorant Garamond", Georgia, serif; font-style:italic; font-size:26px; line-height:1.3; margin:10px 0 12px; color:var(--ink); }
-  .review footer { color:var(--muted); font-size:14px; }
-
-  .area-list { list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:8px 18px; }
-  .area-list li { color:var(--ink); }
-  .area-list li + li::before { content:"·"; margin-right:18px; color:var(--accent); }
-  .areas-note { color:var(--muted); margin:20px 0 0; }
-
-  .estimate-inner { display:grid; gap:30px; }
-  .estimate-copy p { color:var(--muted); font-size:18px; margin:-12px 0 22px; }
-  .estimate-form { display:grid; gap:14px; padding:26px; background:#fff; border-radius:24px; }
-  .estimate-form label { display:grid; gap:6px; font-weight:600; font-size:15px; color:var(--ink); }
-  .estimate-form input, .estimate-form select, .estimate-form textarea { font:inherit; font-weight:400; padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:var(--paper); color:var(--text); width:100%; }
-  .btn-send { background:var(--accent); color:#fff; }
-  .form-status { margin:0; padding:12px 14px; font-size:15px; border-radius:10px; }
-  .form-status.is-ok { background:#E5F0E7; color:#1E4D2B; }
-  .form-status.is-error { background:#F8E7E4; color:#7D2418; }
-
-  .site-footer { background:var(--ink); color:rgba(255,255,255,.72); padding:48px 0 112px; font-size:15px; }
-  .site-footer .wrap { display:grid; gap:6px; }
-  .site-footer .logo { color:#fff; margin-bottom:10px; }
-  .site-footer p { margin:0 0 10px; }
-  .fine { font-size:13px; opacity:.7; }
-
-  .mobile-bar { position:fixed; inset:auto 0 0; z-index:30; padding:10px 12px calc(10px + env(safe-area-inset-bottom)); background:var(--paper); border-top:1px solid var(--line); }
-  .mobile-bar .btns { display:grid; grid-template-columns:1fr 1fr; }
-  .mobile-bar .btn { min-height:48px; padding:12px; }
-
-  @media (min-width: 860px) {
-    section { padding:104px 0; }
-    .head-call { display:inline-flex; }
-    .hero { display:grid; grid-template-columns:1.1fr .9fr; align-items:center; width:min(1080px, 100% - 32px); margin-inline:auto; padding:40px 0 90px; gap:48px; }
-    .hero .wrap { width:auto; text-align:left; }
-    .hero h1, .hero-sub { margin-left:0; }
-    .hero .btns, .proof { justify-content:flex-start; }
-    .hero-media { margin:0; width:auto; }
-    .service-list { display:grid; grid-template-columns:1fr 1fr; column-gap:56px; border-top:0; }
-    .service { border-top:1px solid var(--line); border-bottom:0; }
-    .gallery-grid { grid-template-columns:repeat(4, 1fr); }
-    .review-list { grid-template-columns:repeat(3, 1fr); }
-    .estimate-inner { grid-template-columns:1fr 1.1fr; gap:64px; align-items:start; }
-    .site-footer { padding-bottom:48px; }
-    .site-footer .wrap { grid-template-columns:2fr 1.4fr 1.4fr; }
-    .fine { grid-column:1/-1; }
-    .mobile-bar { display:none; }
-  }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+  /* Theme tokens only. Structure lives in templates/base.css (injected by engine.js). */
+  :root { --font: "Hanken Grotesk", system-ui, sans-serif; --font-display: "Fraunces", Georgia, serif; --radius: 24px; }
 </style>
 </head>
 <body>

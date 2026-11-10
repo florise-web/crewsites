@@ -1,15 +1,16 @@
 <!doctype html>
 <html lang="en">
-<head><meta name="robots" content="noindex, nofollow">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
 <title>Triple J's Auto Repair</title>
 <meta name="description" content="Auto repair · Pasadena, TX. Call (713) 947-8389.">
 
 <!-- ============================================================
-     ДАННЫЕ БИЗНЕСА. Универсальный шаблон «услуги на дому»: клининг, сантехника,
-     электрика, HVAC, переезды, автосервис, юристы и бухгалтеры (без галереи).
-     Генератор заменяет этот блок целиком.
+     BUSINESS DATA. generate.js rewrites only this block.
+     Texts as { en, es, ru } show in the language the visitor picks (English first for US businesses).
+     ?lang=es at the end of the address opens the Spanish version.
      ============================================================ -->
 <script>
 window.SITE = {
@@ -27,18 +28,19 @@ window.SITE = {
   "city": "Pasadena, TX",
   "rating": 4.9,
   "reviewCount": 463,
+  "contact": "whatsapp",
   "langs": [
     "en",
     "es"
   ],
   "defaultLang": "en",
-  "heroStyle": "card",
   "sections": [
     "header",
     "hero",
     "services",
-    "reviews",
     "gallery",
+    "reviews",
+    "process",
     "areas",
     "estimate",
     "footer"
@@ -177,10 +179,10 @@ window.SITE = {
     "Baytown"
   ],
   "colors": {
-    "accent": "#FF8A5B",
-    "ink": "#24264A",
-    "paper": "#F7F7FA",
-    "soft": "#E8E8F1"
+    "accent": "#FF7A59",
+    "ink": "#23264A",
+    "paper": "#F8F8FB",
+    "soft": "#E9E9F3"
   },
   "ui": {
     "formTitle": {
@@ -191,114 +193,14 @@ window.SITE = {
   }
 };
 </script>
-<!-- ======================= конец данных ======================= -->
+<!-- ======================= end of data ======================= -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
-  :root { --accent:#F2B33D; --ink:#12395B; --paper:#F6F8FA; --soft:#E7EEF4; --text:#1B2733; --muted:#5A6774; --line:rgba(18,57,91,.14); }
-  * { box-sizing:border-box; }
-  html { scroll-behavior:smooth; }
-  body { margin:0; font-family:"Manrope", system-ui, -apple-system, sans-serif; color:var(--text); background:var(--paper); font-size:17px; line-height:1.6; }
-  img { display:block; max-width:100%; }
-  a { color:inherit; }
-  .wrap { width:min(1120px, 100% - 32px); margin-inline:auto; }
-  h1,h2,h3 { font-weight:800; line-height:1.12; margin:0; letter-spacing:-.01em; }
-  h2 { font-size:clamp(28px, 4.6vw, 42px); color:var(--ink); margin-bottom:28px; }
-  section { padding:68px 0; }
-  :focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
-
-  .btns { display:flex; flex-wrap:wrap; gap:10px; }
-  .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:14px 22px; border-radius:999px; text-decoration:none; border:0; font:inherit; font-weight:800; cursor:pointer; min-height:52px; }
-  .btn svg { width:20px; height:20px; flex:none; }
-  .btn-call { background:var(--accent); color:#1A1A1A; }
-  .btn-wa { background:#25D366; color:#0B2B17; }
-  .btn:hover { filter:brightness(1.06); }
-
-  .site-header { background:#fff; border-bottom:1px solid var(--line); position:relative; z-index:20; }
-  .site-header .wrap { display:flex; align-items:center; justify-content:space-between; min-height:64px; gap:12px; }
-  .logo { font-weight:800; font-size:19px; color:var(--ink); text-decoration:none; margin:0; line-height:1.2; }
-  .head-actions { display:flex; align-items:center; gap:14px; flex:none; }
-  .lang { background:var(--soft); border:0; color:var(--ink); border-radius:999px; padding:7px 13px; font:inherit; font-size:14px; font-weight:600; cursor:pointer; }
-  .head-call { display:none; align-items:center; gap:6px; text-decoration:none; font-weight:800; color:var(--ink); }
-  .head-call svg { width:18px; height:18px; }
-
-  .hero { background:var(--ink); color:#fff; padding:40px 0 0; overflow:hidden; display:flex; flex-direction:column; }
-  .hero .wrap { order:1; }
-  .hero-body { position:relative; z-index:1; padding-bottom:30px; }
-  .hero-kicker { display:inline-block; background:rgba(255,255,255,.12); color:#fff; border-radius:999px; padding:5px 14px; margin:0 0 16px; font-weight:600; font-size:14px; }
-  .hero h1 { font-size:clamp(34px, 8.4vw, 64px); max-width:14em; }
-  .hero-sub { font-size:18px; max-width:32em; color:rgba(255,255,255,.84); margin:16px 0 24px; }
-  .proof { list-style:none; padding:0; margin:22px 0 0; display:flex; flex-wrap:wrap; gap:8px 22px; font-size:15px; color:rgba(255,255,255,.82); }
-  .proof b { color:var(--accent); white-space:nowrap; }
-  .hero-media { width:min(1120px, 100% - 32px); margin:0 auto; order:2; }
-  .hero-media img { width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:22px 22px 0 0; }
-
-  .service-list { display:grid; gap:14px; counter-reset:svc; }
-  .service { background:#fff; border:1px solid var(--line); border-radius:18px; padding:22px 22px 22px 74px; position:relative; counter-increment:svc; }
-  .service::before { content:counter(svc); position:absolute; left:20px; top:20px; width:38px; height:38px; border-radius:50%; background:var(--soft); color:var(--ink); font-weight:800; display:grid; place-items:center; }
-  .service h3 { font-size:20px; color:var(--ink); margin-bottom:4px; }
-  .service p { margin:0; color:var(--muted); }
-
-  .reviews { background:var(--soft); }
-  .review-list { display:grid; gap:16px; }
-  .review { margin:0; background:#fff; border-radius:18px; padding:24px; }
-  .review .stars { color:var(--accent); letter-spacing:3px; font-size:16px; }
-  .review p { font-size:18px; line-height:1.5; margin:10px 0 12px; color:var(--text); }
-  .review footer { color:var(--muted); font-size:14px; font-weight:600; }
-
-  .gallery-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-  .gallery figure { margin:0; }
-  .gallery figure:first-child { grid-column:1/-1; }
-  .gallery img { width:100%; aspect-ratio:1; object-fit:cover; border-radius:14px; }
-  .gallery figure:first-child img { aspect-ratio:16/10; }
-  .gallery figcaption { font-size:14px; color:var(--muted); padding-top:6px; }
-  .pv-gallery-note { color:var(--muted); }
-
-  .area-list { list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:10px; }
-  .area-list li { background:#fff; border:1px solid var(--line); border-radius:999px; padding:8px 16px; font-weight:600; color:var(--ink); }
-  .areas-note { color:var(--muted); margin:22px 0 0; }
-
-  .estimate { background:var(--ink); color:#fff; }
-  .estimate h2 { color:#fff; }
-  .estimate-inner { display:grid; gap:30px; }
-  .estimate-copy p { color:rgba(255,255,255,.8); font-size:18px; margin:-12px 0 22px; }
-  .estimate-form { display:grid; gap:14px; padding:24px; background:#fff; border-radius:20px; color:var(--text); }
-  .estimate-form label { display:grid; gap:6px; font-weight:600; font-size:15px; color:var(--ink); }
-  .estimate-form input, .estimate-form select, .estimate-form textarea { font:inherit; font-weight:400; padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:var(--paper); color:var(--text); width:100%; }
-  .btn-send { background:var(--ink); color:#fff; }
-  .form-status { margin:0; padding:12px 14px; font-size:15px; border-radius:10px; }
-  .form-status.is-ok { background:#E5F0E7; color:#1E4D2B; }
-  .form-status.is-error { background:#F8E7E4; color:#7D2418; }
-
-  .site-footer { background:#0C2238; color:rgba(255,255,255,.72); padding:48px 0 112px; font-size:15px; }
-  .site-footer .wrap { display:grid; gap:6px; }
-  .site-footer .logo { color:#fff; margin-bottom:10px; }
-  .site-footer p { margin:0 0 10px; }
-  .fine { font-size:13px; opacity:.7; }
-
-  .mobile-bar { position:fixed; inset:auto 0 0; z-index:30; padding:10px 12px calc(10px + env(safe-area-inset-bottom)); background:#fff; border-top:1px solid var(--line); }
-  .mobile-bar .btns { display:grid; grid-template-columns:1fr 1fr; }
-  .mobile-bar .btn { min-height:48px; padding:12px; }
-
-  @media (min-width: 860px) {
-    section { padding:100px 0; }
-    .head-call { display:inline-flex; }
-    .hero { padding-top:72px; }
-    .hero-body { padding-bottom:48px; }
-    .service-list { grid-template-columns:1fr 1fr; }
-    .review-list { grid-template-columns:repeat(3, 1fr); }
-    .gallery-grid { grid-template-columns:2fr 1fr 1fr; }
-    .gallery figure:first-child { grid-column:1; grid-row:1 / span 2; }
-    .gallery figure:first-child img { aspect-ratio:auto; height:calc(100% - 30px); }
-    .estimate-inner { grid-template-columns:1fr 1.1fr; gap:64px; align-items:start; }
-    .site-footer { padding-bottom:48px; }
-    .site-footer .wrap { grid-template-columns:2fr 1.4fr 1.4fr; }
-    .fine { grid-column:1/-1; }
-    .mobile-bar { display:none; }
-  }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+  /* Theme tokens only. Structure lives in templates/base.css (injected by engine.js). */
+  :root { --font: "Plus Jakarta Sans", system-ui, sans-serif; --radius: 16px; }
 </style>
 </head>
 <body>
