@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Your website details | Crew Sites</title>
+<meta name="description" content="Tell us about your business so we can build your website.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<style>
+  :root { --paper:#F2F3EF; --ink:#141C24; --blue:#2449D8; --marker:#FF5B2E; --rule:#D3D7D0; --steel:#5B6670; --white:#fff; --ok:#1FA855; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:"Archivo", system-ui, sans-serif; font-size:17px; line-height:1.5; -webkit-font-smoothing:antialiased; }
+  .wrap { width:min(680px, 100% - 32px); margin-inline:auto; }
+  :focus-visible { outline:3px solid var(--marker); outline-offset:3px; }
+
+  .top { background:rgba(242,243,239,.92); border-bottom:1px solid var(--rule); position:sticky; top:0; z-index:5; backdrop-filter:blur(8px); }
+  .top .wrap { min-height:60px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  .brand { display:flex; align-items:center; gap:10px; font-weight:800; font-size:19px; font-stretch:118%; letter-spacing:-.01em; }
+  .brand svg { width:28px; height:28px; flex:none; }
+  .langs { display:flex; gap:6px; }
+  .langs button { min-width:44px; min-height:40px; border:1.5px solid var(--ink); border-radius:999px; background:none; font:inherit; font-size:14px; font-weight:700; color:var(--ink); cursor:pointer; }
+  .langs button[aria-pressed="true"] { background:var(--ink); color:var(--paper); }
+
+  h1 { margin:30px 0 10px; font-size:clamp(34px, 9vw, 52px); line-height:.98; font-weight:800; font-stretch:118%; letter-spacing:-.03em; }
+  .lead { color:var(--steel); margin:0 0 22px; }
+  .tip { background:var(--white); border-left:5px solid var(--marker); padding:14px 16px; border-radius:0 12px 12px 0; margin:0 0 28px; font-size:16px; }
+  .tip b { display:block; }
+
+  fieldset { border:0; padding:0; margin:0 0 26px; min-width:0; }
+  legend { font-size:22px; font-weight:800; font-stretch:112%; letter-spacing:-.01em; padding:0; margin-bottom:12px; }
+  label { display:block; font-weight:700; font-size:16px; margin:16px 0 6px; }
+  .opt { font-weight:400; color:var(--steel); font-size:14px; }
+  .hint { display:block; font-weight:400; color:var(--steel); font-size:14px; margin-top:2px; }
+  input, textarea { width:100%; font:inherit; font-size:17px; color:var(--ink); background:var(--white); border:1.5px solid var(--rule); border-radius:12px; padding:13px 14px; min-height:50px; }
+  textarea { min-height:104px; resize:vertical; }
+  input:focus, textarea:focus { border-color:var(--blue); outline:none; box-shadow:0 0 0 3px rgba(36,73,216,.18); }
+  .bad { border-color:#C62828 !important; }
+  .err { color:#C62828; font-size:15px; font-weight:600; margin:0 0 14px; display:none; }
+  .err.on { display:block; }
+
+  .btn { display:flex; align-items:center; justify-content:center; width:100%; min-height:58px; padding:14px 22px; border-radius:999px; font:inherit; font-weight:700; font-size:18px; border:2px solid var(--ink); cursor:pointer; }
+  .btn-main { background:var(--blue); border-color:var(--blue); color:#fff; }
+  .btn-main:hover { filter:brightness(.92); }
+  .btn-alt { background:none; color:var(--ink); margin-top:12px; }
+  .btn-alt:hover { background:var(--white); }
+  .after { display:none; background:var(--white); border:2px solid var(--ok); border-radius:14px; padding:16px; margin:22px 0 0; }
+  .after.on { display:block; }
+  .after b { color:var(--ok); }
+  .after ol { margin:8px 0 0; padding-left:22px; }
+  .after textarea { margin-top:12px; min-height:140px; font-size:14px; }
+  footer { padding:34px 0 60px; color:var(--steel); font-size:14px; }
+  noscript p { background:#fff3cd; padding:12px 16px; border-radius:10px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <svg viewBox="0 0 28 28" aria-hidden="true"><rect width="28" height="28" rx="7" fill="#141C24"/><path d="M8 19.5V8.5M20 19.5V8.5" stroke="#FF5B2E" stroke-width="2.4"/><path d="M8 14h12" stroke="#F2F3EF" stroke-width="2.4"/></svg>
+      <span>Crew Sites</span>
+    </div>
+    <div class="langs" role="group" aria-label="Language">
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="es">ES</button>
+      <button type="button" data-lang="ru">RU</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <noscript><p>Please turn on JavaScript, or just message us your business name, phone, city, services and hours.</p></noscript>
+  <h1 data-i="title">Your website details</h1>
+  <p class="lead" data-i="lead">Takes about 5 minutes. Fill in what you can; skip what you don't have. Then tap the blue button and we'll start your website.</p>
+  <p class="tip"><b data-i="tipT">Photos of your work</b><span data-i="tip">Send them straight in the Messenger chat after this form (the more, the better).</span></p>
+
+  <form id="f" novalidate>
+    <fieldset>
+      <legend data-i="g1">About you</legend>
+      <label for="biz"><span data-i="biz">Business name</span></label>
+      <input id="biz" name="biz" autocomplete="organization" data-req>
+      <label for="name"><span data-i="name">Your name</span></label>
+      <input id="name" name="name" autocomplete="name" data-req>
+      <label for="phone"><span data-i="phone">Phone for the Call button</span></label>
+      <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(713) 555-0123" data-req>
+      <label for="wa"><span data-i="wa">WhatsApp number</span> <span class="opt" data-i="optIf">(only if you have one)</span></label>
+      <input id="wa" name="wa" type="tel" inputmode="tel" placeholder="(713) 555-0123">
+      <label for="email"><span data-i="email">Email</span></label>
+      <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com">
+    </fieldset>
+
+    <fieldset>
+      <legend data-i="g2">What you do</legend>
+      <label for="city"><span data-i="city">City and areas you serve</span><span class="hint" data-i="cityH">Example: Houston, Katy, Sugar Land, Pasadena</span></label>
+      <textarea id="city" name="city" data-req></textarea>
+      <label for="services"><span data-i="services">Your services</span><span class="hint" data-i="servicesH">One per line. Example: Interior painting</span></label>
+      <textarea id="services" name="services" data-req></textarea>
+      <label for="prices"><span data-i="prices">Prices “from”</span> <span class="opt" data-i="opt">(optional)</span><span class="hint" data-i="pricesH">Example: Interior painting from $300 per room</span></label>
+      <textarea id="prices" name="prices"></textarea>
+      <label for="hours"><span data-i="hours">Working hours</span><span class="hint" data-i="hoursH">Example: Mon–Sat 7am–6pm</span></label>
+      <input id="hours" name="hours">
+      <label for="exp"><span data-i="exp">Years in business / license</span> <span class="opt" data-i="optIf">(only if you have one)</span><span class="hint" data-i="expH">We only write what you tell us. Nothing made up.</span></label>
+      <input id="exp" name="exp">
+    </fieldset>
+
+    <fieldset>
+      <legend data-i="g3">Your online pages</legend>
+      <p class="lead" style="margin:0 0 4px;font-size:16px" data-i="g3p">We take your photos and reviews from there.</p>
+      <label for="fb">Facebook</label>
+      <input id="fb" name="fb" inputmode="url" autocapitalize="off" placeholder="facebook.com/...">
+      <label for="ig">Instagram</label>
+      <input id="ig" name="ig" inputmode="url" autocapitalize="off" placeholder="instagram.com/...">
+      <label for="gm">Google Maps <span class="opt" data-i="gmH">(link to your business)</span></label>
+      <input id="gm" name="gm" inputmode="url" autocapitalize="off" placeholder="maps.app.goo.gl/...">
+    </fieldset>
+
+    <fieldset>
+      <legend data-i="g4">Look and web address</legend>
+      <label for="domain"><span data-i="domain">Web address you want</span> <span class="opt" data-i="opt">(optional)</span><span class="hint" data-i="domainH">Example: ponceshandyman.com. If you already own one, write it. If not, we'll help you pick.</span></label>
+      <input id="domain" name="domain" inputmode="url" autocapitalize="off">
+      <label for="brand"><span data-i="brand">Colors and logo</span> <span class="opt" data-i="optIf">(if you have them)</span><span class="hint" data-i="brandH">Write your colors. Send the logo in the chat.</span></label>
+      <input id="brand" name="brand">
+      <label for="notes"><span data-i="notes">What matters most</span><span class="hint" data-i="notesH">Example: free estimates, 24/7 emergency, we speak Spanish, family business</span></label>
+      <textarea id="notes" name="notes"></textarea>
+    </fieldset>
+
+    <p class="err" id="err" role="alert" data-i="err">Please fill in the highlighted fields.</p>
+    <button class="btn btn-main" type="submit" id="send" data-i="send">Send in Messenger</button>
+    <button class="btn btn-alt" type="button" id="copy" data-i="copy">Just copy my answers</button>
+
+    <div class="after" id="after" aria-live="polite">
+      <b data-i="doneT">Copied!</b>
+      <ol>
+        <li data-i="done1">In the chat, press and hold the message box and tap Paste.</li>
+        <li data-i="done2">Press Send. Then add your photos and logo.</li>
+      </ol>
+      <textarea id="out" readonly aria-label="Your answers"></textarea>
+    </div>
+  </form>
+</main>
+<footer class="wrap">Crew Sites</footer>
+
+<script>
+(function () {
+  var MESSENGER = "https://m.me/61596028336448";
+  var T = {
+    en: {
+      title:"Your website details", lead:"Takes about 5 minutes. Fill in what you can; skip what you don't have. Then tap the blue button and we'll start your website.",
+      tipT:"Photos of your work", tip:"Send them straight in the Messenger chat after this form (the more, the better).",
+      g1:"About you", biz:"Business name", name:"Your name", phone:"Phone for the Call button", wa:"WhatsApp number", email:"Email",
+      optIf:"(only if you have one)", opt:"(optional)",
+      g2:"What you do", city:"City and areas you serve", cityH:"Example: Houston, Katy, Sugar Land, Pasadena",
+      services:"Your services", servicesH:"One per line. Example: Interior painting",
+      prices:"Prices “from”", pricesH:"Example: Interior painting from $300 per room",
+      hours:"Working hours", hoursH:"Example: Mon–Sat 7am–6pm",
+      exp:"Years in business / license", expH:"We only write what you tell us. Nothing made up.",
+      g3:"Your online pages", g3p:"We take your photos and reviews from there.", gmH:"(link to your business)",
+      g4:"Look and web address", domain:"Web address you want", domainH:"Example: ponceshandyman.com. If you already own one, write it. If not, we'll help you pick.",
+      brand:"Colors and logo", brandH:"Write your colors. Send the logo in the chat.", notes:"What matters most", notesH:"Example: free estimates, 24/7 emergency, we speak Spanish, family business",
+      err:"Please fill in the highlighted fields.", send:"Send in Messenger", copy:"Just copy my answers",
+      doneT:"Copied!", done1:"In the chat, press and hold the message box and tap Paste.", done2:"Press Send. Then add your photos and logo.",
+      doneFail:"Could not copy automatically. Select the text below, copy it and paste it in the chat."
+    },
+    es: {
+      title:"Datos de su sitio web", lead:"Toma unos 5 minutos. Llene lo que pueda y deje en blanco lo que no tenga. Luego toque el botón azul y empezamos su sitio.",
+      tipT:"Fotos de sus trabajos", tip:"Envíelas directo en el chat de Messenger después de este formulario (mientras más, mejor).",
+      g1:"Sobre usted", biz:"Nombre del negocio", name:"Su nombre", phone:"Teléfono para el botón de llamar", wa:"Número de WhatsApp", email:"Correo electrónico",
+      optIf:"(solo si tiene)", opt:"(opcional)",
+      g2:"Qué hace", city:"Ciudad y zonas donde trabaja", cityH:"Ejemplo: Houston, Katy, Sugar Land, Pasadena",
+      services:"Sus servicios", servicesH:"Uno por línea. Ejemplo: Pintura interior",
+      prices:"Precios “desde”", pricesH:"Ejemplo: Pintura interior desde $300 por cuarto",
+      hours:"Horario de trabajo", hoursH:"Ejemplo: lun–sáb 7am–6pm",
+      exp:"Años de experiencia / licencia", expH:"Solo escribimos lo que usted nos diga. Nada inventado.",
+      g3:"Sus páginas en internet", g3p:"De ahí tomamos sus fotos y reseñas.", gmH:"(enlace de su negocio)",
+      g4:"Estilo y dirección web", domain:"Dirección web que quiere", domainH:"Ejemplo: ponceshandyman.com. Si ya tiene una, escríbala. Si no, le ayudamos a elegir.",
+      brand:"Colores y logo", brandH:"Escriba sus colores. Envíe el logo en el chat.", notes:"Lo más importante", notesH:"Ejemplo: presupuesto gratis, emergencias 24/7, hablamos español, negocio familiar",
+      err:"Por favor llene los campos marcados.", send:"Enviar por Messenger", copy:"Solo copiar mis respuestas",
+      doneT:"¡Copiado!", done1:"En el chat, mantenga presionado el cuadro de mensaje y toque Pegar.", done2:"Presione Enviar. Después agregue sus fotos y su logo.",
+      doneFail:"No se pudo copiar automáticamente. Seleccione el texto de abajo, cópielo y péguelo en el chat."
+    },
+    ru: {
+      title:"Данные для вашего сайта", lead:"Займёт около 5 минут. Заполните, что можете, и пропустите то, чего нет. Потом нажмите синюю кнопку, и мы начнём делать сайт.",
+      tipT:"Фото ваших работ", tip:"Пришлите их прямо в чат Messenger после этой формы (чем больше, тем лучше).",
+      g1:"О вас", biz:"Название бизнеса", name:"Ваше имя", phone:"Телефон для кнопки «Позвонить»", wa:"Номер WhatsApp", email:"Email",
+      optIf:"(только если есть)", opt:"(необязательно)",
+      g2:"Чем занимаетесь", city:"Город и районы, где работаете", cityH:"Например: Houston, Katy, Sugar Land, Pasadena",
+      services:"Ваши услуги", servicesH:"По одной в строке. Например: Покраска внутри",
+      prices:"Цены «от»", pricesH:"Например: покраска комнаты от $300",
+      hours:"Часы работы", hoursH:"Например: пн–сб 7:00–18:00",
+      exp:"Сколько лет работаете / лицензия", expH:"Пишем только то, что вы укажете. Ничего не выдумываем.",
+      g3:"Ваши страницы в интернете", g3p:"Оттуда мы возьмём фото и отзывы.", gmH:"(ссылка на ваш бизнес)",
+      g4:"Стиль и адрес сайта", domain:"Желаемый адрес сайта", domainH:"Например: ponceshandyman.com. Если домен уже есть, напишите его. Если нет, поможем выбрать.",
+      brand:"Цвета и логотип", brandH:"Напишите цвета. Логотип пришлите в чат.", notes:"Что важно подчеркнуть", notesH:"Например: бесплатная оценка, срочные вызовы 24/7, говорим по-русски, семейный бизнес",
+      err:"Заполните поля, отмеченные красным.", send:"Отправить в Messenger", copy:"Только скопировать ответы",
+      doneT:"Скопировано!", done1:"В чате нажмите и удерживайте поле сообщения и выберите «Вставить».", done2:"Нажмите «Отправить». Потом добавьте фото и логотип.",
+      doneFail:"Автоматически скопировать не получилось. Выделите текст ниже, скопируйте и вставьте в чат."
+    }
+  };
+  var TITLES = { en:"Your website details | Crew Sites", es:"Datos de su sitio web | Crew Sites", ru:"Данные для сайта | Crew Sites" };
+  var lang = "en";
+
+  var $ = function (id) { return document.getElementById(id); };
+  var f = $("f");
+
+  function setLang(l) {
+    if (!T[l]) l = "en";
+    lang = l;
+    document.documentElement.lang = l;
+    document.title = TITLES[l];
+    Array.prototype.forEach.call(document.querySelectorAll("[data-i]"), function (el) {
+      var v = T[l][el.getAttribute("data-i")];
+      if (v) el.textContent = v;
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("[data-lang]"), function (b) {
+      b.setAttribute("aria-pressed", b.getAttribute("data-lang") === l ? "true" : "false");
+    });
+  }
+
+  function initialLang() {
+    var m = /[?&]lang=(en|es|ru)/.exec(location.search);
+    if (m) return m[1];
+    var n = (navigator.language || "en").slice(0, 2).toLowerCase();
+    return T[n] ? n : "en";
+  }
+
+  function val(id) { return ($(id).value || "").trim(); }
+
+  function validate() {
+    var ok = true;
+    Array.prototype.forEach.call(f.querySelectorAll("[data-req]"), function (el) {
+      var bad = !el.value.trim();
+      el.classList.toggle("bad", bad);
+      if (bad) ok = false;
+    });
+    $("err").classList.toggle("on", !ok);
+    if (!ok) { var first = f.querySelector(".bad"); if (first) first.focus(); }
+    return ok;
+  }
+
+  /* Ответы всегда с английскими ярлыками: так проще читать и собирать сайт. */
+  function buildText() {
+    var rows = [
+      ["Business name", val("biz")], ["Contact name", val("name")], ["Phone (Call button)", val("phone")],
+      ["WhatsApp", val("wa")], ["Email", val("email")], ["City and areas", val("city")],
+      ["Services", val("services")], ["Prices from", val("prices")], ["Hours", val("hours")],
+      ["Years / license", val("exp")], ["Facebook", val("fb")], ["Instagram", val("ig")],
+      ["Google Maps", val("gm")], ["Domain", val("domain")], ["Colors / logo", val("brand")],
+      ["Important to highlight", val("notes")]
+    ];
+    var lines = ["NEW WEBSITE BRIEF — Crew Sites", "Form language: " + lang.toUpperCase(), ""];
+    rows.forEach(function (r) {
+      if (!r[1]) return;
+      if (r[1].indexOf("\n") > -1) lines.push(r[0] + ":\n" + r[1]);
+      else lines.push(r[0] + ": " + r[1]);
+    });
+    lines.push("", "Photos and logo: sending in this chat.");
+    return lines.join("\n");
+  }
+
+  function legacyCopy(text) {
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed"; ta.style.top = "0"; ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select(); ta.setSelectionRange(0, text.length);
+    var ok = false;
+    try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+
+  function showAfter(text, copied) {
+    var out = $("out");
+    out.value = text;
+    $("after").classList.add("on");
+    var t = $("after").querySelector("[data-i=doneT]");
+    t.textContent = copied ? T[lang].doneT : T[lang].doneFail;
+    $("after").scrollIntoView({ behavior: "smooth", block: "center" });
+    if (!copied) { out.focus(); out.select(); }
+  }
+
+  /* Копируем в том же нажатии (иначе iOS и Safari блокируют), потом открываем Messenger. */
+  function go(openChat) {
+    if (!validate()) return;
+    var text = buildText();
+    var copied = legacyCopy(text);
+    if (!copied && navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { showAfter(text, true); }, function () { showAfter(text, false); });
+    } else {
+      showAfter(text, copied);
+    }
+    if (openChat) {
+      var w = window.open(MESSENGER, "_blank", "noopener");
+      if (!w) location.href = MESSENGER;
+    }
+  }
+
+  f.addEventListener("submit", function (e) { e.preventDefault(); go(true); });
+  $("copy").addEventListener("click", function () { go(false); });
+  f.addEventListener("input", function (e) { if (e.target.classList) e.target.classList.remove("bad"); });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-lang]"), function (b) {
+    b.addEventListener("click", function () { setLang(b.getAttribute("data-lang")); });
+  });
+  setLang(initialLang());
+})();
+</script>
+</body>
+</html>
